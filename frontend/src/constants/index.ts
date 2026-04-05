@@ -1,7 +1,7 @@
 // UHAKIX Constants
 
-// Kenyan Counties (47)
-export const KENYAN_COUNTIES = [
+// Kenyan Counties (47) — as objects with code+name
+export const KENYAN_COUNTIES_WITH_CODES = [
   { code: "001", name: "Mombasa" }, { code: "002", name: "Kwale" },
   { code: "003", name: "Kilifi" }, { code: "004", name: "Tana River" },
   { code: "005", name: "Lamu" }, { code: "006", name: "Taita-Taveta" },
@@ -27,6 +27,9 @@ export const KENYAN_COUNTIES = [
   { code: "045", name: "Kisii" }, { code: "046", name: "Nyamira" },
   { code: "047", name: "Nairobi" },
 ] as const;
+
+// Flat string array for simple dropdowns/maps
+export const KENYAN_COUNTIES = KENYAN_COUNTIES_WITH_CODES.map(c => c.name) as string[];
 
 // Presidential Candidates (sample)
 export const PRESIDENTIAL_CANDIDATES = [
