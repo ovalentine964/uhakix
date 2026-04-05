@@ -1,5 +1,5 @@
 """
-UHAKIX Backend API — Production Entry Point
+UUHAKIX Backend API — Production Entry Point
 FastAPI application with middleware, routing, and lifecycle management.
 """
 
@@ -23,7 +23,7 @@ logger = structlog.get_logger()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application startup and shutdown lifecycle."""
-    logger.info("ujuzio_startup", version="1.0.0", env=settings.app_env)
+    logger.info("uuhakix_startup", version="1.0.0", env=settings.app_env)
 
     # Initialize database connections
     app.state.neo4j = Neo4jDriver(
@@ -49,14 +49,14 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     await app.state.neo4j.close()
-    logger.info("ujuzio_shutdown")
+    logger.info("uuhakix_shutdown")
 
 
 def create_application() -> FastAPI:
     """Create and configure the FastAPI application."""
 
     app = FastAPI(
-        title="UHAKIX API",
+        title="UUHAKIX API",
         description="Kenya's AI-Powered Government Transparency Platform",
         version="1.0.0",
         docs_url="/api/docs",

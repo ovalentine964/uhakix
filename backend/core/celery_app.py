@@ -1,5 +1,5 @@
 """
-UHAKIX Celery Worker — Background Task Processing
+UUHAKIX Celery Worker — Background Task Processing
 Used for scraping, agent orchestration, and blockchain writes.
 """
 
@@ -7,7 +7,7 @@ from celery import Celery
 from core.config import settings
 
 celery_app = Celery(
-    "ujuzio_worker",
+    "uuhakix_worker",
     broker=settings.redis_url,
     backend=settings.redis_url,
 )

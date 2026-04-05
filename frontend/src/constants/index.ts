@@ -1,4 +1,4 @@
-// UUHAKIX Constants
+// UUUHAKIX Constants
 
 // Kenyan Counties (47)
 export const KENYAN_COUNTIES = [

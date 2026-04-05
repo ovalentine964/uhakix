@@ -1,5 +1,5 @@
 """
-UHAKIX Neo4j Schema Definition
+UUHAKIX Neo4j Schema Definition
 Production graph schema for government entities, transactions, and connections.
 """
 

@@ -52,13 +52,13 @@ describe("TransparencyRegistry", function () {
     await registry.connect(ledgerAgent).recordHash(dataHash, "election", "station-001");
     await expect(
       registry.connect(ledgerAgent).recordHash(dataHash, "election", "station-001-dup")
-    ).to.be.revertedWith("UUHAKIX: hash already recorded");
+    ).to.be.revertedWith("UUUHAKIX: hash already recorded");
   });
 
   it("should reject unauthorized submitters", async function () {
     await expect(
       registry.connect(unauthorizedUser).recordHash(dataHash, "election", "station-001")
-    ).to.be.revertedWith("UUHAKIX: not authorized");
+    ).to.be.revertedWith("UUUHAKIX: not authorized");
   });
 
   it("should record a batch of hashes", async function () {
@@ -86,7 +86,7 @@ describe("TransparencyRegistry", function () {
     await registry.connect(ledgerAgent).recordBatch(batchId, hashes, "election");
     await expect(
       registry.connect(ledgerAgent).recordBatch(batchId, hashes, "election")
-    ).to.be.revertedWith("UUHAKIX: batch already recorded");
+    ).to.be.revertedWith("UUUHAKIX: batch already recorded");
   });
 
   it("should track total records and batches", async function () {

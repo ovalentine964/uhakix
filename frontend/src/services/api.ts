@@ -1,4 +1,4 @@
-// UUHAKIX API Client — Centralized HTTP client with auth and error handling
+// UUUHAKIX API Client — Centralized HTTP client with auth and error handling
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
@@ -15,7 +15,7 @@ const api: AxiosInstance = axios.create({
 // Request interceptor — add auth token if available
 api.interceptors.request.use((config) => {
   const token = typeof window !== 'undefined'
-    ? localStorage.getItem('ujuzio_token')
+    ? localStorage.getItem('uuhakix_token')
     : null;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -28,7 +28,7 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 429) {
-      console.warn('Rate limited — UUHAKIX API is protecting against abuse.');
+      console.warn('Rate limited — UUUHAKIX API is protecting against abuse.');
     }
     if (error.response?.status === 403) {
       console.error('Access denied — SHIELD compliance layer blocked this request.');

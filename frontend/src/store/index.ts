@@ -1,4 +1,4 @@
-// UUHAKIX Frontend Store — Zustand for state management
+// UUUHAKIX Frontend Store — Zustand for state management
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -23,7 +23,7 @@ export const useAppStore = create<AppState>()(
       activeTab: 'dashboard',
       setActiveTab: (tab) => set({ activeTab: tab }),
     }),
-    { name: 'ujuzio-storage' }
+    { name: 'uuhakix-storage' }
   )
 );
 

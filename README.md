@@ -1,21 +1,21 @@
-# 🇰🇪 UHAKIX — Verify Everything
+# 🇰🇪 UUHAKIX — Verify Everything
 ## Multi-Agent AI for Government Transparency & Electoral Integrity
 
 > *"Kila shilingi ihesabiwe"* — Every single shilling must be counted.
 
 **Built by [CoHusdex](https://github.com/ovalentine964/cohusdex-public) — Multi-Agentic Economic AI Systems**
 
-UHAKIX (*"Uhakika"* = Certainty + *"Hakiki"* = Verify + *"X"* = AI) is Kenya's first AI-powered, multi-agent government transparency and electoral accountability platform.
+UUHAKIX (*"Uhakika"* = Certainty + *"uuhakix"* = Verify + *"X"* = AI) is Kenya's first AI-powered, multi-agent government transparency and electoral accountability platform.
 
 We illuminate every corrupt deal, verify every vote, track every shilling — so citizens can hold power accountable without shedding blood.
 
 ---
 
-## 🏛️ Why UHAKIX Exists
+## 🏛️ Why UUHAKIX Exists
 
 On **March 9, 2026**, Kenya passed the **National Infrastructure Audit Bill** — a law that allows the government to **audit itself**. Citizens don't understand it. The government claims it will *"take Kenya to Singapore"*. But self-audit without independent verification means nothing to the common mwananchi.
 
-**UHAKIX changes that.**
+**UUHAKIX changes that.**
 
 We give citizens **independent, AI-powered verification** of:
 - ✅ **Where** the money went
@@ -70,7 +70,7 @@ We give citizens **independent, AI-powered verification** of:
 
 ## 🔮 Future-Ready: AGI/Quantum/ASI Integration
 
-UHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum for unbreakable evidence, ASI for predictive governance that detects corruption before it happens.
+UUHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum for unbreakable evidence, ASI for predictive governance that detects corruption before it happens.
 
 ---
 
@@ -102,9 +102,9 @@ AGPL-3.0 (open source — everyone can audit our code)
 
 | Product | Purpose |
 |---------|---------|
-| **UHAKIX** | Government transparency & electoral integrity |
+| **UUHAKIX** | Government transparency & electoral integrity |
 | **SomoPal** | Voice-first KCSE AI tutor for Form 4 students |
 
-> *"No more bloodshed over elections. No more stolen shillings. Just verify. Just UHAKIX."*
+> *"No more bloodshed over elections. No more stolen shillings. Just verify. Just UUHAKIX."*
 
 🇰🇪 *Built for Kenya. Built for Africa. Built for the world.*

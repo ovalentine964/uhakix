@@ -35,7 +35,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-semibold mb-3">Access UJUZIO</h4>
+            <h4 className="text-white font-semibold mb-3">Access UUHAKIX</h4>
             <ul className="space-y-2 text-sm">
               <li>🌐 Web Dashboard</li>
               <li>📱 WhatsApp Bot</li>
@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-xs">
           <p>Data from public government sources. Connection reports only — never accusations.</p>
           <p className="mt-1">Compliant with Kenya Data Protection Act, 2019. No ID required.</p>
-          <p className="mt-1">© 2024 UJUZIO. AGPL-3.0 License. Built by CoHusdex.</p>
+          <p className="mt-1">© 2024 UUHAKIX. AGPL-3.0 License. Built by CoHusdex.</p>
         </div>
       </div>
     </footer>

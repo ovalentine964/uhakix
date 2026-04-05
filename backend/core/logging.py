@@ -1,5 +1,5 @@
 """
-UHAKIX Logging Configuration — Structured JSON logging with Sentry
+UUHAKIX Logging Configuration — Structured JSON logging with Sentry
 """
 
 import logging

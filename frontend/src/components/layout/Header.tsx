@@ -9,7 +9,7 @@ const navLinks = [
   { href: '/election', label: 'Elections' },
   { href: '/directory', label: 'Entity Directory' },
   { href: '/submit', label: 'Report Form 34A' },
-  { href: '/about', label: 'About UJUZIO' },
+  { href: '/about', label: 'About UUHAKIX' },
 ];
 
 export default function Header() {
