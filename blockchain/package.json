@@ -1,7 +1,7 @@
 {
   "name": "ujuzio-blockchain",
   "version": "1.0.0",
-  "description": "UHAKIX Smart Contracts — Polygon deployment",
+  "description": "UUHAKIX Smart Contracts — Polygon deployment",
   "scripts": {
     "compile": "npx hardhat compile",
     "test": "npx hardhat test",

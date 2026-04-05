@@ -1,8 +1,8 @@
 # ── CI/CD Pipeline ──────────────────────────────────────────
-# GitHub Actions workflow for UHAKIX
+# GitHub Actions workflow for UUHAKIX
 # .github/workflows/ci-cd.yml
 
-name: UHAKIX CI/CD
+name: UUHAKIX CI/CD
 
 on:
   push:

@@ -1,4 +1,4 @@
-# Docker Compose — UHAKIX Full Stack
+# Docker Compose — UUHAKIX Full Stack
 # All services start with: docker compose up -d
 
 x-logging: &default-logging

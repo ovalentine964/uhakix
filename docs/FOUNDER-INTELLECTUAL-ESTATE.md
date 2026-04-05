@@ -1,15 +1,15 @@
-# FOUNDER INTELLECTUAL ESTATE — Integrated into HAKIKI
+# FOUNDER INTELLECTUAL ESTATE — Integrated into UUHAKIX
 ## Economics & Statistics Degree — 44 Units — Masinde Muliro University
 
-### How Each Unit Maps to HAKIKI Capability:
+### How Each Unit Maps to UUHAKIX Capability:
 
-Every unit below is mapped to a SPECIFIC agent, function, and use case in the HAKIKI system.
+Every unit below is mapped to a SPECIFIC agent, function, and use case in the UUHAKIX system.
 
 ---
 
 ## YEAR 1 — 2022/2023 | Mean: 62% | Grade: B | 12 units
 
-| Unit | Grade | Application in HAKIKI | Agent | Where Applied |
+| Unit | Grade | Application in UUHAKIX | Agent | Where Applied |
 |------|-------|----------------------|-------|--------------|
 | BCB 108 — Business Communication Skills | C | Citizen report templates, media alert format, public communication standards | HERALD | Public reports, press releases, USSD message format |
 | ECO 100 — Development Concepts & Application | C | Framework for identifying development failures across government | RIFT | Detecting where funding ≠ results |
@@ -18,7 +18,7 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 | ECO 103 — Mathematics for Economists | A | Budget equation verification, fiscal multiplier calculations | SPHINX | Validating treasury budget formulas |
 | ECO 104 — Mathematics for Economists | B | Optimization in resource allocation | SPHINX | Detecting budget inefficiencies |
 | ECO 106 — Emerging Public Health Issues | B | Healthcare spending analysis, pandemic fund tracking | ATLAS | Cross-budgeting health funds across counties |
-| BIT 113 — Fundamentals of IT | A | IT infrastructure for HAKIKI, system architecture, API design | KAZI | Building the platform, API integrations |
+| BIT 113 — Fundamentals of IT | A | IT infrastructure for UUHAKIX, system architecture, API design | KAZI | Building the platform, API integrations |
 | MAT 101 — Foundation Mathematics | D | Basic arithmetic verification of financial statements | LEDGER | Checking county financial reports |
 | MAT 121 — Differential Calculus | B | Rate of change analysis — spending acceleration/deceleration | SPHINX | Detecting sudden budget spikes |
 | MAT 124 — Integral Calculus | C | Cumulative spending over time periods | LEDGER | Total allocation tracking per county over fiscal year |
@@ -28,7 +28,7 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 
 ## YEAR 2 — 2023/2024 | Mean: 57% | Grade: C | 12 units
 
-| Unit | Grade | Application in HAKIKI | Agent | Where Applied |
+| Unit | Grade | Application in UUHAKIX | Agent | Where Applied |
 |------|-------|----------------------|-------|--------------|
 | ECO 201 — Intermediate Microeconomics | C | Game theory in political behavior, bidding strategy analysis | SPHINX | Detecting bid-rigging patterns |
 | ECO 202 — Intro to Economic Statistics | D | Basic statistical description of spending data | LEDGER | Annual public expenditure reports |
@@ -47,7 +47,7 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 
 ## YEAR 3 — 2024/2025 | Mean: 54% | Grade: C | 10 units
 
-| Unit | Grade | Application in HAKIKI | Agent | Where Applied |
+| Unit | Grade | Application in UUHAKIX | Agent | Where Applied |
 |------|-------|----------------------|-------|--------------|
 | ECO 305 — Intro to International Economics | D | Cross-border procurement analysis | ATLAS | Foreign company contract tracking |
 | ECO 313 — International Economics | D | Foreign aid tracking, donor fund allocation | ATLAS | Tracking World Bank/IMF fund usage |
@@ -64,7 +64,7 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 
 ## YEAR 4.1 — 2025/2026 Semester 1 | 4 units
 
-| Unit | Grade | Application in HAKIKI | Agent | Where Applied |
+| Unit | Grade | Application in UUHAKIX | Agent | Where Applied |
 |------|-------|----------------------|-------|--------------|
 | ECO 401 — Economics of Development | — | Development economics framework for county analysis | RIFT | Ranking counties by actual development outcomes |
 | ECO 404 — Attachment (Industrial Practice) | — | Real-world government operations knowledge | ATLAS | Understanding how government actually works |
@@ -75,9 +75,9 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 
 ## YEAR 4.2 — 2025/2026 Semester 2 | CURRENT | 6 units
 
-| Unit | Lecturer | Application in HAKIKI | Agent | Where Applied |
+| Unit | Lecturer | Application in UUHAKIX | Agent | Where Applied |
 |------|----------|----------------------|-------|--------------|
-| ECO 418 — Research Project | Dr. Ngala | Framework for all HAKIKI investigation reports | HERALD / SPHINX | Investigation methodology |
+| ECO 418 — Research Project | Dr. Ngala | Framework for all UUHAKIX investigation reports | HERALD / SPHINX | Investigation methodology |
 | ECO 421 — Public Finance & Fiscal Policy | Mr. Hutton Ndombi | **CORE UNIT** — Government revenue/expenditure analysis | LEDGER / SPHINX | Budget tracking, deficit analysis |
 | ECO 422 — Economics of Industry | Mr. Lianda Mauyo | Industry concentration in procurement, monopoly detection | SPHINX | Finding companies that win most tenders |
 | ECO 424 — Econometrics | Mr. Willis Otieno | **CORE UNIT** — Regression analysis for all investigations | SPHINX | Causal inference: "Did the money go where intended?" |
@@ -95,7 +95,7 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 4. **ECO 205 — Intermediate Macroeconomics (67%, B)**
 5. **STA 346 — Statistical Quality Control (51%, C) → Improving**
 
-### Critical Units for HAKIKI (Must Master):
+### Critical Units for UUHAKIX (Must Master):
 | Unit | Why Critical | Current Status | Action |
 |------|-------------|---------------|--------|
 | ECO 424 — Econometrics | Causal inference for all investigations | Current — study hard | **FOCUS AREA** |
@@ -104,11 +104,11 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 | ECO 421 — Public Finance | Government budget tracking | Current — study hard | **FOCUS AREA** |
 | ECO 422 — Economics of Industry | Procurement cartels detection | Current — study hard | **FOCUS AREA** |
 
-### 🦁 HOW THESE UNITS POWER HAKIKI:
+### 🦁 HOW THESE UNITS POWER UUHAKIX:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│            HAKIKI AGENT SYSTEM                      │
+│            UUHAKIX AGENT SYSTEM                      │
 │                                                     │
 │  ECONOMETRICS (ECO 424) → SPHINX Agent:             │
 │    "County X spends 3x more than peer counties"     │
@@ -155,6 +155,6 @@ Every unit below is mapped to a SPECIFIC agent, function, and use case in the HA
 | Year 3 | 54% | C | 📉 Stabilizing |
 | Year 4.2 | Current | — | 📈 Rising with focus on key units |
 
-**Insight:** Founder has strong quantitative foundations (Math + IT A grades, Probability A). The key to HAKIKI is mastering the CURRENT Year 4.2 units — they are the exact skills needed for the system.
+**Insight:** Founder has strong quantitative foundations (Math + IT A grades, Probability A). The key to UUHAKIX is mastering the CURRENT Year 4.2 units — they are the exact skills needed for the system.
 
-**Recommendation:** Focus HAKIKI development as a CAPSTONE PROJECT. The research project (ECO 418, Dr. Ngala) can BE the HAKIKI system — getting academic credit AND building the real-world platform.
+**Recommendation:** Focus UUHAKIX development as a CAPSTONE PROJECT. The research project (ECO 418, Dr. Ngala) can BE the UUHAKIX system — getting academic credit AND building the real-world platform.
