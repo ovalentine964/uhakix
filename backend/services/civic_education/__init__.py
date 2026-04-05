@@ -1,0 +1,1 @@
+"""UHAKIX Civic Education Module"""
