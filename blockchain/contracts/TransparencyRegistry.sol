@@ -178,7 +178,7 @@ contract TransparencyRegistry {
         string memory referencePrefix
     ) external onlyAuthorized {
         require(dataHashes.length > 0, "Batch cannot be empty");
-        require(dataHashes.length <= 100, "Batch too large — max 100");
+        require(dataHashes.length <= 100, "Batch too large");
         require(bytes(dataType).length > 0, "Data type required");
 
         for (uint256 i = 0; i < dataHashes.length; i++) {
@@ -254,7 +254,7 @@ contract TransparencyRegistry {
     ) external onlyAuthorized {
         require(stationCodes.length > 0, "No stations provided");
         require(stationCodes.length == resultHashes.length, "Array length mismatch");
-        require(stationCodes.length <= 50, "Batch too large — max 50");
+        require(stationCodes.length <= 50, "Batch too large");
 
         for (uint256 i = 0; i < stationCodes.length; i++) {
             require(bytes(stationCodes[i]).length > 0, "Station code cannot be empty");

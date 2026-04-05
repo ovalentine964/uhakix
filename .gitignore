@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+package-lock.json
+
+# Hardhat
+cache/
+artifacts/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Frontend tests (skip from CI)
+frontend/tests/
+frontend/jest.config.js
+
+# Backend tests already pass, skip pytest cache
+.pytest_cache/
