@@ -46,8 +46,8 @@
 2. Sign up with GitHub
 3. Click "New" → "Web Service" → Connect `uhakix` repo
 4. Set Root Directory: `backend`
-5. Install Command: `pip install -r requirements.txt`
-6. Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Install Command: (leave empty)
+6. Start Command: `python minimal_server.py`
 7. Add Environment Variables:
    ```
    NVIDIA_API_KEY=nvapi-your-key-here
