@@ -216,7 +216,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 // NVIDIA AI CHAT - WORKING VERSION
 // ============================
 const NVIDIA_KEY = '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';
-const NVIDIA_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
+const API_URL = 'https://uhakix-api.onrender.com/api/v1/citizen/ask';
 const SYSTEM_PROMPT = `You are UHAKIX 🦁 — Kenya's AI government transparency and civic education assistant.
 
 Rules:
@@ -253,20 +253,14 @@ async function sendToAI(text) {
     msgs.scrollTop = msgs.scrollHeight;
     
     try {
-        const response = await fetch(NVIDIA_URL, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer ' + NVIDIA_KEY,
+                ''Content-Type': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 model: 'nvidia/nemotron-4-340b-instruct',
-                messages: [
-                    { role: 'system', content: SYSTEM_PROMPT },
-                    { role: 'user', content: text }
-                ],
-                max_tokens: 1024,
-                temperature: 0.3,
                 top_p: 0.7
             })
         });
