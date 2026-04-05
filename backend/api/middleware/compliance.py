@@ -1,5 +1,5 @@
 """
-HAKIX Compliance Middleware — SHIELD Legal Layer
+UHAKIX Compliance Middleware — SHIELD Legal Layer
 Every response passes through SHIELD before reaching the citizen.
 Auto-redacts ID numbers, phone numbers, and ensures 3+ source requirement.
 """
@@ -39,8 +39,8 @@ async def compliance_middleware(request: Request, call_next):
     # In production, this feeds into SHIELD agent for full compliance check
 
     # Add compliance headers
-    response.headers["X-HAKIX-Compliance"] = "shield-vetted"
-    response.headers["X-HAKIX-Privacy"] = "data-act-2019"
+    response.headers["X-UHAKIX-Compliance"] = "shield-vetted"
+    response.headers["X-UHAKIX-Privacy"] = "data-act-2019"
 
     return Response(
         content=body_bytes,

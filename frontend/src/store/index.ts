@@ -1,4 +1,4 @@
-// HAKIX Frontend Store — Zustand for state management
+// UHAKIX Frontend Store — Zustand for state management
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'

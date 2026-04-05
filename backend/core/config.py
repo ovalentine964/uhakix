@@ -1,5 +1,5 @@
 """
-HAKIX Configuration — Pydantic Settings with .env support
+UHAKIX Configuration — Pydantic Settings with .env support
 """
 
 from pydantic_settings import BaseSettings
@@ -10,7 +10,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # ── Application ───────────────────────────────────────
-    app_name: str = "HAKIX"
+    app_name: str = "UHAKIX"
     app_env: str = "production"
     app_debug: bool = False
     secret_key: str = "change-me"

@@ -1,4 +1,4 @@
-"""HAKIX Citizen Access API — WhatsApp, USSD, and citizen interactions"""
+"""UHAKIX Citizen Access API — WhatsApp, USSD, and citizen interactions"""
 from fastapi import APIRouter, Request, Form
 from pydantic import BaseModel
 from typing import Optional
@@ -23,11 +23,11 @@ class CitizenResponse(BaseModel):
 @router.post("/ask", response_model=CitizenResponse)
 async def citizen_ask(request: CitizenQuestion):
     """
-    Ask HAKIX anything about government spending.
+    Ask UHAKIX anything about government spending.
     HERALD agent generates citizen-friendly answers in Swahili or English.
     """
     return CitizenResponse(
-        answer="Habari! HAKIX ni hapa kukuambia...",
+        answer="Habari! UHAKIX ni hapa kukuambia...",
         language=request.language,
         sources_cited=0,
         agent_used="HERALD/KAZI",
@@ -61,7 +61,7 @@ async def ussd_callback(
     4 → My County Budget
     0 → Back
     """
-    menu_text = "Karibu HAKIX!\n\n1. Tafuta Matumizi ya Serikali\n2. Matokeo ya Uchaguzi\n3. Ripoti Form 34A\n4. Bajeti ya Kaunti Yangu\n\nJibu:"
+    menu_text = "Karibu UHAKIX!\n\n1. Tafuta Matumizi ya Serikali\n2. Matokeo ya Uchaguzi\n3. Ripoti Form 34A\n4. Bajeti ya Kaunti Yangu\n\nJibu:"
 
     if text == "":
         response = f"CON {menu_text}"
@@ -70,7 +70,7 @@ async def ussd_callback(
     elif text.startswith("2"):
         response = "CON Ingiza Jina la Eneo:"
     else:
-        response = f"END Asante kwa kutumia HAKIX!"
+        response = f"END Asante kwa kutumia UHAKIX!"
 
     return response
 

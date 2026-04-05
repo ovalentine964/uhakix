@@ -63,5 +63,5 @@ class CountAgent(Agent):
         return {"scope": "national", "stations_reported": 0, "reporting_pct": 0.0, "final_votes": {}}
 
     async def _reconcile_against_iebc(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Compare HAKIX count vs IEBC official count."""
+        """Compare UHAKIX count vs IEBC official count."""
         return {"ujuzio_count": {}, "iebc_count": {}, "discrepancies": [], "status": "needs_data"}

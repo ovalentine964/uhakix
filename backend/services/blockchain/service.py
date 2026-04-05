@@ -1,5 +1,5 @@
 """
-HAKIX Blockchain Service — Polygon Smart Contract Interaction
+UHAKIX Blockchain Service — Polygon Smart Contract Interaction
 """
 
 from typing import List, Dict, Any, Optional

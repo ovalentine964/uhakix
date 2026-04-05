@@ -1,5 +1,5 @@
 """
-HAKIX Celery Worker — Background Task Processing
+UHAKIX Celery Worker — Background Task Processing
 Used for scraping, agent orchestration, and blockchain writes.
 """
 

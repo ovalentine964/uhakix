@@ -1,4 +1,4 @@
-# ARCHITECTURE.md — HAKIX Data Flow & System Design
+# ARCHITECTURE.md — UHAKIX Data Flow & System Design
 
 ## Data Flow Diagrams
 
@@ -118,7 +118,7 @@ Citizen                        AI Pipeline                        Blockchain
 
 ### 3. Citizen Query Flow (WhatsApp/USSD/Web)
 ```
-Citizen                    HAKIX Platform                 Data Sources
+Citizen                    UHAKIX Platform                 Data Sources
    │                              │                              │
    │ "How much did Health Ministry│                              │
    │  spend on road construction?"│                              │

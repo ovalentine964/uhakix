@@ -1,4 +1,4 @@
-"""HAKIX Agent Status & Query API"""
+"""UHAKIX Agent Status & Query API"""
 from typing import List, Dict, Optional
 from fastapi import APIRouter, Query
 from pydantic import BaseModel

@@ -2,7 +2,7 @@
   "name": "ujuzio-frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "HAKIX — Kenya's Government Transparency Dashboard",
+  "description": "UHAKIX — Kenya's Government Transparency Dashboard",
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
