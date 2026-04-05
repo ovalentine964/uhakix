@@ -1,4 +1,4 @@
-# UUHAKIX Backend — Python Dependencies
+# UHAKIX Backend — Python Dependencies
 # Python 3.11+
 
 # ── Web Framework ────────────────────────────────────────────

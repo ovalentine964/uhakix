@@ -1,21 +1,21 @@
-# 🇰🇪 UUHAKIX — Verify Everything
+# 🇰🇪 UHAKIX — Verify Everything
 ## Multi-Agent AI for Government Transparency & Electoral Integrity
 
 > *"Kila shilingi ihesabiwe"* — Every single shilling must be counted.
 
 **Built by [CoHusdex](https://github.com/ovalentine964/cohusdex-public) — Multi-Agentic Economic AI Systems**
 
-UUHAKIX (*"Uhakika"* = Certainty + *"uuhakix"* = Verify + *"X"* = AI) is Kenya's first AI-powered, multi-agent government transparency and electoral accountability platform.
+UHAKIX (*"Uhakika"* = Certainty + *"Hakiki"* = Verify + *"X"* = AI) is Kenya's first AI-powered, multi-agent government transparency and electoral accountability platform.
 
 We illuminate every corrupt deal, verify every vote, track every shilling — so citizens can hold power accountable without shedding blood.
 
 ---
 
-## 🏛️ Why UUHAKIX Exists
+## 🏛️ Why UHAKIX Exists
 
 On **March 9, 2026**, Kenya passed the **National Infrastructure Audit Bill** — a law that allows the government to **audit itself**. Citizens don't understand it. The government claims it will *"take Kenya to Singapore"*. But self-audit without independent verification means nothing to the common mwananchi.
 
-**UUHAKIX changes that.**
+**UHAKIX changes that.**
 
 We give citizens **independent, AI-powered verification** of:
 - ✅ **Where** the money went
@@ -58,19 +58,29 @@ We give citizens **independent, AI-powered verification** of:
 
 ## 📡 Citizen Access Channels
 
-| Channel | How It Works |
-|---------|-------------|
-| **Web** | Full dashboard: charts, entity graphs, investigations |
-| **Telegram** | Chat with AI, ask "Where did my county's money go?" |
-| **WhatsApp** | Send Form 34A photos, ask budget questions |
-| **USSD** | *XXX# — No internet needed, basic queries |
-| **SMS** | Election day alerts |
+### 1. WhatsApp (Connected via QR — Same as OpenClaw)
+- Connect via scanning QR code (no API token needed — uses your WhatsApp device link)
+- Send Form 34A photos, chat with AI, ask about government spending
+- Works 24/7 with auto-reconnect
+
+### 2. Telegram Bot
+- Add your Telegram bot token from @BotFather
+- Same capabilities as WhatsApp
+- Works via webhooks for reliability
+
+### 3. Web Dashboard
+- Full dashboard: charts, entity graphs, investigations
+- Real-time election monitoring
+- Anonymous corruption reporting
+
+### 4. USSD (*XXX#) — Coming After WhatsApp & Telegram
+- No internet needed — basic spending checks, election results, anonymous tips
 
 ---
 
 ## 🔮 Future-Ready: AGI/Quantum/ASI Integration
 
-UUHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum for unbreakable evidence, ASI for predictive governance that detects corruption before it happens.
+UHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum for unbreakable evidence, ASI for predictive governance that detects corruption before it happens.
 
 ---
 
@@ -83,6 +93,8 @@ UUHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum fo
 | **Blockchain** | Polygon (evidence storage, vote verification) |
 | **Frontend** | React + TypeScript (web), React Native (mobile) |
 | **Backend** | FastAPI (Python) |
+| **WhatsApp** | Device-link via QR (same as OpenClaw) |
+| **Telegram** | Bot API with webhooks |
 
 ---
 
@@ -102,9 +114,9 @@ AGPL-3.0 (open source — everyone can audit our code)
 
 | Product | Purpose |
 |---------|---------|
-| **UUHAKIX** | Government transparency & electoral integrity |
+| **UHAKIX** | Government transparency & electoral integrity |
 | **SomoPal** | Voice-first KCSE AI tutor for Form 4 students |
 
-> *"No more bloodshed over elections. No more stolen shillings. Just verify. Just UUHAKIX."*
+> *"No more bloodshed over elections. No more stolen shillings. Just verify. Just UHAKIX."*
 
 🇰🇪 *Built for Kenya. Built for Africa. Built for the world.*

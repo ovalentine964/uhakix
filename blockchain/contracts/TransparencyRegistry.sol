@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /**
- * UUUHAKIX Transparency Registry
+ * UHAKIX Transparency Registry
  * Stores hashes of verified government data + election results on Polygon.
  * Immutable, publicly verifiable, cannot be tampered.
  *
@@ -56,12 +56,12 @@ contract TransparencyRegistry {
 
     // ── Modifiers ───────────────────────────────────────────
     modifier onlyOwner() {
-        require(msg.sender == owner, "UUUHAKIX: not owner");
+        require(msg.sender == owner, "UHAKIX: not owner");
         _;
     }
 
     modifier onlyAuthorized() {
-        require(authorizedSubmitters[msg.sender], "UUUHAKIX: not authorized");
+        require(authorizedSubmitters[msg.sender], "UHAKIX: not authorized");
         _;
     }
 
@@ -83,7 +83,7 @@ contract TransparencyRegistry {
         string calldata dataType,
         string calldata referenceId
     ) external onlyAuthorized {
-        require(!records[dataHash].exists, "UUUHAKIX: hash already recorded");
+        require(!records[dataHash].exists, "UHAKIX: hash already recorded");
 
         records[dataHash] = DataRecord({
             dataHash: dataHash,
@@ -112,8 +112,8 @@ contract TransparencyRegistry {
         bytes32[] calldata hashes,
         string calldata dataType
     ) external onlyAuthorized {
-        require(!batches[batchId].exists, "UUUHAKIX: batch already recorded");
-        require(hashes.length > 0, "UUUHAKIX: empty batch");
+        require(!batches[batchId].exists, "UHAKIX: batch already recorded");
+        require(hashes.length > 0, "UHAKIX: empty batch");
 
         // Record individual hashes
         for (uint256 i = 0; i < hashes.length; i++) {
@@ -168,7 +168,7 @@ contract TransparencyRegistry {
         string memory dataType,
         string memory referenceId
     ) {
-        require(records[dataHash].exists, "UUUHAKIX: hash not found");
+        require(records[dataHash].exists, "UHAKIX: hash not found");
         DataRecord storage record = records[dataHash];
         return (record.submitter, record.timestamp, record.dataType, record.referenceId);
     }
@@ -181,7 +181,7 @@ contract TransparencyRegistry {
         uint256 timestamp,
         uint256 hashCount
     ) {
-        require(batches[batchId].exists, "UUUHAKIX: batch not found");
+        require(batches[batchId].exists, "UHAKIX: batch not found");
         BatchRecord storage batch = batches[batchId];
         return (batch.dataType, batch.timestamp, batch.hashCount);
     }
@@ -215,7 +215,7 @@ contract TransparencyRegistry {
 
     // ── Ownership Transfer ──────────────────────────────────
     function transferOwnership(address newOwner) external onlyOwner {
-        require(newOwner != address(0), "UUUHAKIX: zero address");
+        require(newOwner != address(0), "UHAKIX: zero address");
         owner = newOwner;
     }
 }

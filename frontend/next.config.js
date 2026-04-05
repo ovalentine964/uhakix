@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'standalone',
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: '**.uuhakix.ke' },
+      { protocol: 'https', hostname: '**.uhakix.ke' },
       { protocol: 'https', hostname: 'results.iebc.or.ke' },
     ],
     domains: ['localhost'],

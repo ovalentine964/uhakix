@@ -1,4 +1,4 @@
-# Docker Compose — UUUHAKIX Full Stack
+# Docker Compose — UHAKIX Full Stack
 # All services start with: docker compose up -d
 
 x-logging: &default-logging
@@ -31,7 +31,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://uuhakix:uuhakix_password@postgres:5432/uuhakix
+      - DATABASE_URL=postgresql+asyncpg://uhakix:uhakix_password@postgres:5432/uhakix
       - REDIS_URL=redis://redis:6379/0
       - NEO4J_URI=bolt://neo4j:7687
       - NEO4J_USER=neo4j
@@ -59,7 +59,7 @@ services:
       dockerfile: Dockerfile
     command: celery -A core.celery_app worker -l info -c 4
     environment:
-      - DATABASE_URL=postgresql+asyncpg://uuhakix:uuhakix_password@postgres:5432/uuhakix
+      - DATABASE_URL=postgresql+asyncpg://uhakix:uhakix_password@postgres:5432/uhakix
       - REDIS_URL=redis://redis:6379/0
       - NEO4J_URI=bolt://neo4j:7687
       - NEO4J_USER=neo4j
@@ -94,14 +94,14 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=uuhakix
-      - POSTGRES_PASSWORD=uuhakix_password
-      - POSTGRES_DB=uuhakix
+      - POSTGRES_USER=uhakix
+      - POSTGRES_PASSWORD=uhakix_password
+      - POSTGRES_DB=uhakix
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./infra/docker/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U uuhakix -d uuhakix"]
+      test: ["CMD-SHELL", "pg_isready -U uhakix -d uhakix"]
       interval: 10s
       timeout: 5s
       retries: 5

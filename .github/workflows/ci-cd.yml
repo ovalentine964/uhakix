@@ -1,8 +1,8 @@
 # ── CI/CD Pipeline ──────────────────────────────────────────
-# GitHub Actions workflow for UUUHAKIX
+# GitHub Actions workflow for UHAKIX
 # .github/workflows/ci-cd.yml
 
-name: UUUHAKIX CI/CD
+name: UHAKIX CI/CD
 
 on:
   push:
@@ -23,9 +23,9 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_USER: uuhakix
+          POSTGRES_USER: uhakix
           POSTGRES_PASSWORD: test_password
-          POSTGRES_DB: uuhakix_test
+          POSTGRES_DB: uhakix_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -68,7 +68,7 @@ jobs:
 
       - name: Run tests
         env:
-          DATABASE_URL: postgresql+asyncpg://uuhakix:test_password@localhost:5432/uuhakix_test
+          DATABASE_URL: postgresql+asyncpg://uhakix:test_password@localhost:5432/uhakix_test
           REDIS_URL: redis://localhost:6379/0
           NEO4J_URI: bolt://localhost:7687
           NVIDIA_API_KEY: test-key

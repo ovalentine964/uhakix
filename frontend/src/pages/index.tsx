@@ -46,7 +46,7 @@ export default function HomePage() {
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            How UUHAKIX Works
+            How UHAKIX Works
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
@@ -71,7 +71,7 @@ export default function HomePage() {
       {/* Access Channels */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8 text-gray-900">Access UUHAKIX Your Way</h2>
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">Access UHAKIX Your Way</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <AccessCard emoji="🌐" title="Web Dashboard" desc="Full data exploration" />
             <AccessCard emoji="📱" title="WhatsApp Bot" desc="Chat + photo uploads" />

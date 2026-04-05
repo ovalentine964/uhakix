@@ -1,8 +1,8 @@
-# UUHAKIX — Critical Sectors Research Report
+# UHAKIX — Critical Sectors Research Report
 
 > **Prepared by:** CoHusdex Research Agent  
 > **Date:** April 5, 2026  
-> **Purpose:** Inform UUHAKIX development priorities, feature set, and data integration roadmap  
+> **Purpose:** Inform UHAKIX development priorities, feature set, and data integration roadmap  
 > **Scope:** National Infrastructure Fund, SHA, e-Citizen, County Governments, Education/CDF
 
 ---
@@ -15,7 +15,7 @@
 4. [Sector 4: County Government Spending](#sector-4-county-government-spending)
 5. [Sector 5: Education Funding (NG-CDF, Bursaries, Infrastructure)](#sector-5-education-funding-ng-cdf-bursaries-infrastructure)
 6. [Additional Critical Sectors To Monitor](#additional-critical-sectors-to-monitor)
-7. [Recommended UUHAKIX Features — Full Prioritized Roadmap](#recommended-uuhakix-features--full-prioritized-roadmap)
+7. [Recommended UHAKIX Features — Full Prioritized Roadmap](#recommended-uhakix-features--full-prioritized-roadmap)
 8. [Data Sources Index](#data-sources-index)
 
 ---
@@ -84,7 +84,7 @@
 - **Asset-stripping risk:** Privatization proceeds of state-owned enterprises flow into an LLC with weakened oversight
 - **Timeline:** The 90-day investment policy window — Parliament *can* reject, but this is the only check
 
-### 1.6 Recommended UUHAKIX Features
+### 1.6 Recommended UHAKIX Features
 
 1. **NIF Governance Tracker** — AI-powered monitoring of Board appointments (disqualification checks, conflict-of-interest flagging, political affiliation analysis)
 2. **Constitutional Compliance Monitor** — Automated analysis of whether NIF operations comply with Article 221; alert when bypasses occur
@@ -158,7 +158,7 @@ SHA was launched in **October 2024** to replace the scandal-ridden National Heal
 7. **SHA doesn't control its own IT system:** Managed by Ministry of Health and Digital Health Authority — SHA is vulnerable with no oversight
 8. **Political pressure:** Saboti MP Caleb Amisi called it a "national security issue"
 
-### 2.6 Recommended UUHAKIX Features
+### 2.6 Recommended UHAKIX Features
 
 1. **SHA Watchdog Dashboard** — Real-time tracking of SHA spending: facility payments, suspended facilities, arrest status, claim settlement rates
 2. **Ghost Facility Checker** — Cross-reference SHA payment data against physical facility lists; flag payments to non-existent or closed facilities
@@ -233,7 +233,7 @@ e-Citizen is Kenya's flagship digital platform that centralizes access to **over
 
 8. **Government doesn't own source code:** The platform's IP may still belong to private contractors.
 
-### 3.5 Recommended UUHAKIX Features
+### 3.5 Recommended UHAKIX Features
 
 1. **e-Citizen Revenue Tracker** — Aggregate and display all publicly reported e-Citizen revenue data with irregularity flags
 2. **Convenience Fee Calculator** — Show citizens the true cost of government services including hidden convenience fees
@@ -302,7 +302,7 @@ Kenya's 47 county governments collectively receive approximately **KES 300–360
 | Tenders | tenders.go.ke | County procurement tenders |
 | PPRA | ppra.go.ke | Public procurement records including county tenders |
 
-### 4.4 Recommended UUHAKIX Features
+### 4.4 Recommended UHAKIX Features
 
 1. **County Scorecard** — Rank all 47 counties on financial integrity, audit compliance, project delivery, wage bill compliance
 2. **County AG Report Analyzer** — AI-powered summarization of AG findings per county with trend analysis
@@ -343,7 +343,7 @@ The **National Government Constituencies Development Fund (NG-CDF)** is constitu
 | National Treasury | treasury.go.ke | CDF allocation data in Budget Review and Outlook Paper |
 | County COB reports | controllerofbudget.go.ke | Some education expenditure data |
 
-### 5.4 Recommended UUHAKIX Features
+### 5.4 Recommended UHAKIX Features
 
 1. **NG-CDF Transparency Dashboard** — Track every shilling of CDF per constituency: allocations, projects, completion status
 2. **Bursary Equity Monitor** — Analyze bursary distribution vs. student poverty indices; flag constituencies with suspicious patterns
@@ -396,7 +396,7 @@ The **National Government Constituencies Development Fund (NG-CDF)** is constitu
 
 ---
 
-## RECOMMENDED UUHAKIX FEATURES — FULL PRIORITIZED ROADMAP
+## RECOMMENDED UHAKIX FEATURES — FULL PRIORITIZED ROADMAP
 
 ### Tier 1: IMMEDIATE (0-3 months) — High Impact, Lower Complexity
 
@@ -483,22 +483,22 @@ The **National Government Constituencies Development Fund (NG-CDF)** is constitu
 
 ---
 
-## KEY INSIGHTS FOR UUHAKIX STRATEGY
+## KEY INSIGHTS FOR UHAKIX STRATEGY
 
-1. **SHA is the most urgent sector** — A KES 104 billion system hemorrhaging KES 26+ billion in confirmed fraud while citizens suffer. This is UUHAKIX's most compelling entry point for public attention.
+1. **SHA is the most urgent sector** — A KES 104 billion system hemorrhaging KES 26+ billion in confirmed fraud while citizens suffer. This is UHAKIX's most compelling entry point for public attention.
 
-2. **e-Citizen is the most systemically dangerous** — No legal framework, billions unaccounted for, citizens' data at risk. PAC has called for shutdown. If UUHAKIX can be the persistent memory of this scandal, that's invaluable.
+2. **e-Citizen is the most systemically dangerous** — No legal framework, billions unaccounted for, citizens' data at risk. PAC has called for shutdown. If UHAKIX can be the persistent memory of this scandal, that's invaluable.
 
-3. **NIF is the most constitutionally significant** — A KES 5 trillion fund designed to evade parliamentary oversight. The "government auditing itself" model is a fundamental threat to Kenyan democracy. UUHAKIX can be the citizen's counter-audit.
+3. **NIF is the most constitutionally significant** — A KES 5 trillion fund designed to evade parliamentary oversight. The "government auditing itself" model is a fundamental threat to Kenyan democracy. UHAKIX can be the citizen's counter-audit.
 
-4. **County spending is the most data-rich** — 47 counties = 47 data streams. COB reports, AG reports, IFMIS. UUHAKIX can build the most comprehensive county accountability platform ever.
+4. **County spending is the most data-rich** — 47 counties = 47 data streams. COB reports, AG reports, IFMIS. UHAKIX can build the most comprehensive county accountability platform ever.
 
-5. **Data persistence is the core value proposition** — Governments delete data (SHA pulled down payment lists, e-Citizen obscures revenue flows). UUHAKIX's permanent archive is irreplaceable.
+5. **Data persistence is the core value proposition** — Governments delete data (SHA pulled down payment lists, e-Citizen obscures revenue flows). UHAKIX's permanent archive is irreplaceable.
 
-6. **AI pattern detection is the differentiator** — No one is doing automated cross-referencing of tenders, payments, facilities, and beneficiaries at scale. This is where UUHAKIX can do what journalists and auditors manually attempt.
+6. **AI pattern detection is the differentiator** — No one is doing automated cross-referencing of tenders, payments, facilities, and beneficiaries at scale. This is where UHAKIX can do what journalists and auditors manually attempt.
 
 ---
 
 *This research document is a living resource. Update as new data, audits, and investigations emerge.*
 
-**🦁 CoHusdex | UUHAKIX — AI-Powered Government Transparency & Electoral Accountability**
+**🦁 CoHusdex | UHAKIX — AI-Powered Government Transparency & Electoral Accountability**

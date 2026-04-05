@@ -1,185 +1,180 @@
-"""UHAKIX Scraper Services — Government data ingestion"""
+"""
+UHAKIX Scraper Base — Base class for all data source scrapers
+Handles HTTP sessions, retries, rate limiting, and data validation.
+"""
+
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
-from datetime import datetime
+from typing import Any, Dict, List, Optional
+import asyncio
+import time
 import httpx
+from urllib.parse import urljoin
 import structlog
-from bs4 import BeautifulSoup
 
 logger = structlog.get_logger()
 
 
+class ScraperError(Exception):
+    """Custom scraper exception."""
+    pass
+
+
 class BaseScraper(ABC):
-    """Base scraper for government data sources."""
-    
-    source_name: str = "base"
+    """Base class for all UHAKIX data source scrapers."""
+
     base_url: str = ""
-    headers = {"User-Agent": "UHAKIX Transparency Bot/1.0 (+https://uhakix.ke)"}
+    source_name: str = "base"
+    default_timeout: int = 30
+    max_retries: int = 3
+    retry_delay: float = 2.0
 
-    async def _fetch(self, url: str, params: Dict = None) -> str:
-        async with httpx.AsyncClient(timeout=30) as client:
-            response = await client.get(url, headers=self.headers, params=params)
-            response.raise_for_status()
-            return response.text
+    def __init__(
+        self,
+        base_url: Optional[str] = None,
+        timeout: Optional[int] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ):
+        self.base_url = base_url or self.base_url
+        self.timeout = timeout or self.default_timeout
+        self.headers = headers or self._default_headers()
+        self._client: Optional[httpx.AsyncClient] = None
+        self._last_request_time = 0.0
+        self._min_request_interval = 1.0  # Rate limit: 1 req/sec default
 
-    async def _post(self, url: str, data: Dict = None, json_data: Dict = None) -> str:
-        async with httpx.AsyncClient(timeout=30) as client:
-            response = await client.post(url, headers=self.headers, data=data, json=json_data)
-            response.raise_for_status()
-            return response.text
-
-    @abstractmethod
-    async def scrape(self, **kwargs) -> List[Dict[str, Any]]:
-        raise NotImplementedError
-
-    async def scrape_and_store(self, **kwargs) -> Dict[str, Any]:
-        """Scrape data and store in Neo4j. Returns ingestion stats."""
-        records = await self.scrape(**kwargs)
+    def _default_headers(self) -> Dict[str, str]:
         return {
-            "source": self.source_name,
-            "records_fetched": len(records),
-            "records": records,
-            "ingested_at": datetime.utcnow().isoformat(),
+            "User-Agent": "UHAKIX/1.0 (Government Transparency Platform; +https://uhakix.ke)",
+            "Accept": "application/json, text/html, */*",
+            "Accept-Language": "en-US,en;q=0.9,sw;q=0.8",
         }
 
+    def _set_rate_limit(self, requests_per_second: float = 1.0):
+        """Configure rate limiting."""
+        self._min_request_interval = 1.0 / requests_per_second if requests_per_second > 0 else 0
 
-class IFMISScraper(BaseScraper):
-    """Scrape IFMIS (ifmis.go.ke) — Government financial transactions."""
-    
-    source_name = "IFMIS"
-    base_url = "https://ifmis.go.ke"
+    async def _get_client(self) -> httpx.AsyncClient:
+        """Get or create the HTTP client."""
+        if self._client is None or self._client.is_closed:
+            self._client = httpx.AsyncClient(
+                base_url=self.base_url,
+                headers=self.headers,
+                timeout=self.timeout,
+                follow_redirects=True,
+                http2=True,
+                limits=httpx.Limits(max_connections=10, max_keepalive_connections=5),
+            )
+        return self._client
 
-    async def scrape(self, ministry: str = None, county: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("ifmis_scrape_start", ministry=ministry, county=county)
-        # In production: implement actual scraping or API calls
-        # IFMIS may require authentication or have limited public API
-        transactions = [
-            {
-                "source": "IFMIS",
-                "ministry": ministry or "Sample Ministry",
-                "department": "Sample Department",
-                "amount_kes": 0,
-                "purpose": "Sample transaction",
-                "vendor": "Sample Vendor",
-                "ifmis_code": "SAMPLE-001",
-                "date": datetime.utcnow().date().isoformat(),
-            }
-        ]
-        logger.info("ifmis_scrape_complete", count=len(transactions))
-        return transactions
+    async def close(self):
+        """Close the HTTP client."""
+        if self._client and not self._client.is_closed:
+            await self._client.aclose()
+            self._client = None
 
+    async def _respect_rate_limit(self):
+        """Ensure minimum interval between requests."""
+        now = time.monotonic()
+        elapsed = now - self._last_request_time
+        if elapsed < self._min_request_interval:
+            await asyncio.sleep(self._min_request_interval - elapsed)
 
-class TendersScraper(BaseScraper):
-    """Scrape tenders.go.ke — Government procurement portal."""
-    
-    source_name = "TENDERS"
-    base_url = "https://tenders.go.ke"
+    async def _request(
+        self,
+        method: str,
+        url: str,
+        params: Optional[Dict] = None,
+        json_body: Optional[Dict] = None,
+    ) -> httpx.Response:
+        """Make an HTTP request with retries and rate limiting."""
+        await self._respect_rate_limit()
+        client = await self._get_client()
 
-    async def scrape(self, ministry: str = None, status: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("tenders_scrape_start", ministry=ministry, status=status)
-        tenders = []
-        # Production: scrape tenders.go.ke listings
-        # Parse HTML, extract tender reference, title, ministry, status, amounts
-        logger.info("tenders_scrape_complete", count=len(tenders))
-        return tenders
+        last_exception = None
+        for attempt in range(self.max_retries):
+            try:
+                response = await client.request(
+                    method,
+                    url,
+                    params=params,
+                    json=json_body,
+                )
+                self._last_request_time = time.monotonic()
 
+                # Handle rate limiting from the server
+                if response.status_code == 429:
+                    retry_after = float(response.headers.get("Retry-After", self.retry_delay * (attempt + 1)))
+                    logger.warning(
+                        "scraper_rate_limited",
+                        source=self.source_name,
+                        url=url,
+                        retry_after=retry_after,
+                        attempt=attempt + 1,
+                    )
+                    await asyncio.sleep(retry_after)
+                    continue
 
-class CoBScraper(BaseScraper):
-    """Scrape Controller of Budget (controllerofbudget.go.ke) — Budget execution."""
-    
-    source_name = "COB"
-    base_url = "https://controllerofbudget.go.ke"
+                response.raise_for_status()
+                return response
 
-    async def scrape(self, entity: str = None, period: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("cob_scrape_start", entity=entity, period=period)
-        # Production: scrape quarterly budget execution reports
-        return []
+            except httpx.HTTPStatusError as e:
+                last_exception = e
+                if attempt < self.max_retries - 1:
+                    wait = self.retry_delay * (2 ** attempt)
+                    logger.warning(
+                        "scraper_http_error",
+                        source=self.source_name,
+                        url=url,
+                        status=e.response.status_code,
+                        attempt=attempt + 1,
+                        retry_wait=wait,
+                    )
+                    await asyncio.sleep(wait)
+                else:
+                    raise ScraperError(f"HTTP {e.response.status_code} for {url}: {e}") from e
 
+            except httpx.TimeoutException as e:
+                last_exception = e
+                if attempt < self.max_retries - 1:
+                    wait = self.retry_delay * (2 ** attempt)
+                    logger.warning(
+                        "scraper_timeout",
+                        source=self.source_name,
+                        url=url,
+                        attempt=attempt + 1,
+                        retry_wait=wait,
+                    )
+                    await asyncio.sleep(wait)
+                else:
+                    raise ScraperError(f"Timeout fetching {url}") from e
 
-class TreasuryScraper(BaseScraper):
-    """Scrape National Treasury (treasury.go.ke) — Budget allocations."""
-    
-    source_name = "TREASURY"
-    base_url = "https://treasury.go.ke"
+            except httpx.RequestError as e:
+                last_exception = e
+                if attempt < self.max_retries - 1:
+                    wait = self.retry_delay * (2 ** attempt)
+                    await asyncio.sleep(wait)
+                else:
+                    raise ScraperError(f"Request error fetching {url}: {e}") from e
 
-    async def scrape(self, fiscal_year: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("treasury_scrape_start", fiscal_year=fiscal_year)
-        # Production: scrape budget estimates, supplementary estimates
-        return []
+        raise ScraperError(f"Failed after {self.max_retries} retries: {url}")
 
+    async def fetch_json(self, url: str, params: Optional[Dict] = None) -> Dict:
+        """Fetch JSON data from a URL."""
+        response = await self._request("GET", url, params=params)
+        return response.json()
 
-class GEDScraper(BaseScraper):
-    """Scrape Kenya Gazette — Government appointments, notices."""
-    
-    source_name = "GAZETTE"
-    base_url = ""
+    async def fetch_html(self, url: str, params: Optional[Dict] = None) -> str:
+        """Fetch HTML data from a URL."""
+        response = await self._request("GET", url, params=params)
+        return response.text
 
-    async def scrape(self, date_from: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("gazette_scrape_start", date_from=date_from)
-        # Production: scrape or download gazette notices
-        return []
+    @abstractmethod
+    async def fetch(self, **kwargs) -> List[Dict[str, Any]]:
+        """Main fetch method — must be implemented by subclasses."""
 
+    def validate_record(self, record: Dict[str, Any]) -> bool:
+        """Validate a single record. Override in subclass."""
+        return True
 
-class IEBCScraper(BaseScraper):
-    """Scrape IEBC Results Portal — Election data."""
-    
-    source_name = "IEBC"
-    base_url = "https://results.iebc.or.ke"
-
-    async def scrape(self, election_type: str = "presidential", **kwargs) -> List[Dict[str, Any]]:
-        logger.info("iebc_scrape_start", election_type=election_type)
-        # Production: scrape official IEBC results
-        # Include: polling station, constituency, county, candidate votes
-        return []
-
-
-class ParliamentScraper(BaseScraper):
-    """Scrape Parliament Hansard — MP statements, debates."""
-    
-    source_name = "PARLIAMENT"
-    base_url = ""
-
-    async def scrape(self, session: str = None, mp: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("parliament_scrape_start", session=session, mp=mp)
-        # Production: scrape Hansard records
-        # Extract: MP name, constituency, topic, date, sentiment
-        return []
-
-
-class CountyScraper(BaseScraper):
-    """Scrape County Government Portals — 47 county budgets."""
-    
-    source_name = "COUNTY"
-    base_url = ""
-
-    async def scrape(self, county_code: str = None, **kwargs) -> List[Dict[str, Any]]:
-        logger.info("county_scrape_start", county_code=county_code)
-        # Production: scrape each county's budget documents
-        # 47 counties, each with their own portal
-        return []
-
-
-# ── Scheduler ────────────────────────────────────────────────
-SCRAPER_REGISTRY = {
-    "ifmis": IFMISScraper,
-    "tenders": TendersScraper,
-    "cob": CoBScraper,
-    "treasury": TreasuryScraper,
-    "gazette": GEDScraper,
-    "iebc": IEBCScraper,
-    "parliament": ParliamentScraper,
-    "county": CountyScraper,
-}
-
-
-async def run_all_scrapers() -> Dict[str, Any]:
-    """Run all scrapers and return aggregated results."""
-    results = {}
-    for name, scraper_cls in SCRAPER_REGISTRY.items():
-        try:
-            scraper = scraper_cls()
-            results[name] = await scraper.scrape_and_store()
-        except Exception as e:
-            logger.error("scraper_failed", source=name, error=str(e))
-            results[name] = {"error": str(e)}
-    return results
+    @abstractmethod
+    def parse(self, raw_data: Any) -> List[Dict[str, Any]]:
+        """Parse raw data into structured records. Override in subclass."""
