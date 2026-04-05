@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>UHAKIX — Verify Everything</title>
+  <meta name="description" content="Kenya's AI-powered government transparency platform. Monitor spending, verify elections, learn your rights. All free.">
+  <meta name="theme-color" content="#060606">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#060606;--card:#111;--gold:#c9a84c;--text:#e5e5e5;--muted:#888;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--border:#1a1a1a}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+@media(max-width:900px){.pgrid{grid-template-columns:1fr}.steps-grp{grid-template-columns:1fr;gap:48px}.sr,.sh{grid-template-columns:1fr 1fr .4fr}.sr .fl,.sr .rc,.sh .fl,.sh span:nth-child(4){display:none}.nav{display:none}.nav.open{display:flex}.mbtn{display:block}}
+@media(min-width:901px){.mbtn{display:none}.nav{display:flex}}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.steps-grp{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:60px}
+.sr,.sh{display:grid;gap:16px;padding:24px;border:1px solid var(--border);border-radius:12px;align-items:center;transition:.2s}
+.sr:hover{border-color:#333;background:rgba(201,168,76,.02)}
+.badge{text-align:center;padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600}
+.b-now{background:rgba(34,197,94,.12);color:#22c55e}
+.b-research{background:rgba(255,255,255,.05);color:var(--muted)}
+.rc{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600;margin-top:6px}
+.rc-cf{background:rgba(59,130,246,.12);color:#3b82f6}
+.rc-ia{background:rgba(168,85,247,.12);color:#a855f7}
+.rc-mp{background:rgba(251,146,60,.12);color:#fb923c}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">🦁 UHAKIX</div>
+    <div class="status-dot"></div><span id="statusText">Online</span>
+  </div>
+  <div class="mbtn">☰</div>
+  <div class="nav">
+    <a href="#problem">Problem</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#chat">Ask AI</a>
+    <a href="#election">Elections</a>
+    <a href="#civic">Civic Ed</a>
+    <a href="https://t.me/uhakixbot" target="_blank" class="btn">📱 Telegram</a>
+  </div>
+</div>
+
+<section class="hero">
+    <div>
+      <div class="logo">🦁</div>
+      <h1>We Verify <em>Everything</em></h1>
+      <p class="sub">Kenya's AI-powered government transparency platform. Track spending. Verify elections. Know your rights. All free, all voice-enabled.</p>
+      <div class="cta-grp">
+        <a href="#chat" class="btn btn-primary">🦁 Ask UHAKIX</a>
+        <a href="#sectors" class="btn btn-secondary">📊 View Sectors</a>
+      </div>
+    </div>
+</section>
+
+<section id="problem" style="padding-top:0">
+    <div class="sec">
+      <div class="label">The Problem</div>
+      <h2>Trillions Lost to Coordination Failure</h2>
+      <p class="sub2">On March 9, 2026, Kenya passed a law allowing government to audit itself. Citizens have no independent verification. UHAKIX changes that.</p>
+      <div class="pgrid">
+        <div class="pc"><div class="val">KES 70B</div><div class="title">Annual Crop Loss</div><div class="desc">30-40% of Kenya's harvest rots before market</div></div>
+        <div class="pc"><div class="val">500B+</div><div class="title">County Budget Waste</div><div class="desc">Billions spent with zero transparency</div></div>
+        <div class="pc"><div class="val">1.8T</div><div class="title">Total Inefficiency</div><div class="desc">Corruption, over-billing, fake contracts</div></div>
+      </div>
+      <p style="text-align:center;color:#f;margin-top:48px;max-width:640px;margin-left:auto"><strong style="color:var(--gold)">This is not a tragedy. It's a solvable problem.</strong></p>
+    </div>
+</section>
+
+<section id="sectors">
+    <div class="sec">
+      <div class="label">Sectors We Monitor</div>
+      <h2>Where Your Money Goes</h2>
+      <p class="sub2">Every sector tracked. Every shilling accounted for.</p>
+      <div class="secg">
+        <div class="sh"><span>Sector</span><span>Market Size</span><span>Pain</span><span></span></div>
+        <div class="sr">
+          <div><strong>🏗️ Infrastructure</strong><div class="rc rc-cf">Critical</div></div>
+          <div>KES 200-400B</div>
+          <div>Self-audit law, zero independent oversight</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>🏥 SHA (Health)</strong><div class="rc rc-cf">Critical</div></div>
+          <div>KES 50-100B</div>
+          <div>KES 26B fraud, 40+ facilities suspended</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>💻 e-Citizen</strong><div class="rc rc-ia">High</div></div>
+          <div>KES 30-50B</div>
+          <div>KES 68B irregularities, no oversight body</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>🏛️ Counties</strong><div class="rc rc-cf">Critical</div></div>
+          <div>KES 300-500B</div>
+          <div>47 counties, systemic corruption</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>📋 Procurement</strong><div class="rc rc-cf">Critical</div></div>
+          <div>KES 400-800B</div>
+          <div>Ghost companies, inflated contracts</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>🗳️ Elections</strong><div class="rc rc-ia">High</div></div>
+          <div>Priceless</div>
+          <div>Vote manipulation, Form 34A tampering</div>
+          <span class="badge b-now">NOW</span>
+        </div>
+        <div class="sr">
+          <div><strong>🎓 Education</strong><div class="rc rc-ia">High</div></div>
+          <div>KES 50-80B</div>
+          <div>Opaque bursaries, political allocation</div>
+          <span class="badge b-research">VALIDATING</span>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- AI CHAT SECTION -->
+<section id="chat">
+    <div class="sec">
+      <div class="label">Ask UHAKIX</div>
+      <h2>Talk to Your Government AI</h2>
+      <p class="sub2">Ask about budgets, your rights, elections, corruption — in English, Kiswahili, or Sheng. Tap 🎤 to speak.</p>
+      
+      <div class="chat-box">
+        <div id="chat-messages">
+          <div class="msg bot">
+            <div class="label">🦁 UHAKIX</div>
+            <div>Habari! I'm UHAKIX. Ask me anything about government spending, your constitutional rights, elections, or how to spot political manipulation. Tap the 🎤 button or type your question.<br><br>🇰🇪 I understand <strong>English, Kiswahili, and Sheng.</strong></div>
+          </div>
+        </div>
+        <div class="typing" id="typing"></div>
+        <div class="quick-actions">
+          <div class="chip" data-q="Where is my county's budget going?">Budget</div>
+          <div class="chip" data-q="What are my rights as a citizen?">My Rights</div>
+          <div class="chip" data-q="How do politicians manipulate voters?">Manipulation</div>
+          <div class="chip" data-q="How do I verify election results?">Elections</div>
+          <div class="chip" data-q="Check if tender is legit">Tender Check</div>
+        </div>
+        <div class="input-row">
+          <button class="voice-toggle" id="voice-toggle" title="Toggle voice responses">🔊</button>
+          <input type="text" id="chat-input" placeholder="Ask about government, your rights...">
+          <button class="btn-mic" id="mic-btn" title="Speak">🎤</button>
+          <button class="btn-send" id="send-btn">➤</button>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- ELECTION SECTION -->
+<section id="election">
+    <div class="sec">
+      <div class="label">Election Verification</div>
+      <h2>Verify Every Vote</h2>
+      <p class="sub2">Upload photo of Form 34A. AI verifies. Blockchain stores it. Tamper-proof forever.</p>
+      
+      <div class="upload-zone" id="upload-zone">
+        <div class="icon">📷</div>
+        <h3>Upload Form 34A Photo</h3>
+        <p>Tap or drag • Supports: JPG, PNG • Max 10MB</p>
+        <input type="file" id="file-input" accept="image/*" style="display:none">
+      </div>
+      
+      <div id="preview-container" style="display:none;margin-top:16px">
+        <div class="card">
+          <h3>📊 AI Verification Results</h3>
+          <div id="verification-result">
+            <div class="spinner"></div>
+            <p style="color:var(--muted);font-size:.8rem">Analyzing photo for watermarks, signatures, station code...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>🔊 Voice Verification</h3>
+        <p>Call or send voice notes on Telegram bot to report election irregularities.</p>
+        <div class="cta-grp" style="margin-top:12px;justify-content:flex-start">
+          <a href="https://t.me/uhakixbot" target="_blank" class="btn btn-primary">📱 Telegram Bot</a>
+          <button class="btn btn-secondary" id="election-voice-btn">🎤 Report Irregularity</button>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- CIVIC EDUCATION SECTION -->
+<section id="civic">
+    <div class="sec">
+      <div class="label">Civic Education</div>
+      <h2>Know Your Rights</h2>
+      <p class="sub2">Every Kenyan citizen has constitutional rights. Learn them. Enforce them.</p>
+      
+      <div class="constitution-item"><div class="art">Art 35</div><div class="info"><h4>Access to Information</h4><p>Every citizen has the right to access information held by the State</p></div></div>
+      <div class="constitution-item"><div class="art">Art 43</div><div class="info"><h4>Economic & Social Rights</h4><p>Right to healthcare, education, accessible housing, food & water</p></div></div>
+      <div class="constitution-item"><div class="art">Art 47</div><div class="info"><h4>Fair Administrative Action</h4><p>Administrative action must be expeditious, efficient, lawful, reasonable</p></div></div>
+      <div class="constitution-item"><div class="art">Art 201</div><div class="info"><h4>Public Finance Transparency</h4><p>Public finance conducted with openness, accountability, public participation</p></div></div>
+      <div class="constitution-item"><div class="art">Art 77</div><div class="info"><h4>Leadership Integrity</h4><p>State officers must declare income, assets, liabilities. No using power for personal gain</p></div></div>
+
+      <div class="card" style="margin-top:20px;border-color:rgba(239,68,68,.3)">
+        <h3>⚠️ 48 Laws of Political Power — Spot Manipulation</h3>
+        <p>Politicians use these tactics. Know them. Don't fall for them.</p>
+      </div>
+
+      <div class="manipulation-item">
+        <div class="law">Law 3: Vague Promises</div>
+        <div class="example">🔴 "I'll create jobs" — no plan, no budget, no timeline</div>
+        <div class="action">✅ Ask: "What is your specific plan? Where's the budget?"</div>
+      </div>
+      <div class="manipulation-item">
+        <div class="law">Law 8: Bribery</div>
+        <div class="example">🔴 "Gifts" of maize, cash, food during campaign</div>
+        <div class="action">✅ This is YOUR tax money. Real leaders provide systems, not handouts.</div>
+      </div>
+      <div class="manipulation-item">
+        <div class="law">Law 27: Ethnic Division</div>
+        <div class="example">🔴 "My tribe deserves to eat" / "If they win, you suffer"</div>
+        <div class="action">✅ Demand policies for ALL. Constitution Art 27 says NO discrimination.</div>
+      </div>
+      <div class="manipulation-item">
+        <div class="law">Law 43: Emotional Manipulation</div>
+        <div class="example">🔴 Crying, anger, fear at rallies — zero policy details</div>
+        <div class="action">✅ Separate feelings from facts. Ask for their track record.</div>
+      </div>
+    </div>
+</section>
+
+<footer>
+    <div class="flog">🦁</div>
+    <p><strong>UHAKIX</strong> — "Uhakika" (Certainty) + "Hakiki" (Verify) + X (AI)</p>
+    <p>Built by <a href="https://github.com/ovalentine964/cohusdex-public" target="_blank">CoHusdex</a> — Multi-Agentic Economic AI Systems</p>
+    <p style="margin-top:16px"><a href="https://github.com/ovalentine964/uhakix" target="_blank">GitHub</a> · <a href="https://t.me/uhakixbot" target="_blank">Telegram Bot</a> · <a href="https://github.com/ovalentine964/uhakix/blob/main/DEPLOY.md" target="_blank">Deploy Guide</a></p>
+    <p style="margin-top:16px;color:#44;font-size:.8rem">AGPL-3.0 · Open Source · Auditable</p>
+    <p style="margin-top:8px;color:#44;font-size:.8rem">🇰🇪 Built for Kenya. Built for Africa. Built for the world.</p>
+    <p style="margin-top:8px;color:#44;font-size:.8rem">"No more bloodshed over elections. No more stolen shillings. Just verify. Just UHAKIX."</p>
+    <p style="margin-top:8px;color:#44;font-size:.8rem">NVIDIA AI · Whisper Voice · MMS TTS · Polygon Blockchain</p>
+</footer>
+<div class="nav">
+    <a href="#problem">Problem</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#chat">Ask AI</a>
+    <a href="#election">Elections</a>
+    <a href="#civic">Civic Ed</a>
+    <a href="https://t.me/uhakixbot" target="_blank" class="btn">📱 Telegram</a>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.mbtn').forEach(el=>el.addEventListener('click',()=>document.querySelector('.nav').classList.toggle('open')));
+// Typing indicator
+function showTyping(){document.getElementById('typing').style.display='block';document.getElementById('typing').innerHTML='<span></span><span></span><span></span>';}
+function hideTyping(){document.getElementById('typing').style.display='none';}
+
+// Speech Recognition
+let recognition=null;let isRecording=false;
+if('webkitSpeechRecognition' in window||'SpeechRecognition' in window){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR();recognition.continuous=false;recognition.interimResults=false;recognition.lang='sw-KE';
+  recognition.onstart=()=>{isRecording=true;document.getElementById('mic-btn').classList.add('listening');};
+  recognition.onend=()=>{isRecording=false;document.getElementById('mic-btn').classList.remove('listening');};
+  recognition.onresult=(e)=>{document.getElementById('chat-input').value=e.results[0][0].transcript;sendMsg(e.results[0][0].transcript);};
+  recognition.onerror=()=>{isRecording=false;document.getElementById('mic-btn').classList.remove('listening');};
+}
+
+document.getElementById('mic-btn').addEventListener('click',()=>{
+  if(!recognition){alert('Voice not supported. Try Chrome.');return;}
+  if(isRecording)recognition.stop();else recognition.start();
+});
+
+let voiceEnabled=true;
+document.getElementById('voice-toggle').addEventListener('click',()=>{
+  voiceEnabled=!voiceEnabled;
+  document.getElementById('voice-toggle').textContent=voiceEnabled?'🔊':'🔇';
+});
+
+function speak(text){
+  if(!voiceEnabled||!('speechSynthesis' in window))return;
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='sw-KE';u.rate=0.9;window.speechSynthesis.speak(u);
+}
+
+function addMsg(text,role){
+  const d=document.createElement('div');d.className='msg '+role;
+  d.innerHTML=`<div class="label">${role==='user'?'🧑‍🎓 You':'🦁 UHAKIX'}</div><div>${text}</div>`;
+  document.getElementById('chat-messages').appendChild(d);
+  document.getElementById('chat-messages').scrollTop=document.getElementById('chat-messages').scrollHeight;
+}
+
+async function sendMsg(text){
+  if(!text.trim())return;
+  addMsg(text,'user');document.getElementById('chat-input').value='';showTyping();
+  
+  try{
+    const r=await fetch('https://integrate.api.nvidia.com/v1/chat/completions',{
+      method:'POST',headers:{Authorization:'Bearer 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',ContentType:'application/json'},
+      body:JSON.stringify({
+        model:'meta/llama-3.1-70b-instruct',
+        messages:[
+          {role:'system',content:'
