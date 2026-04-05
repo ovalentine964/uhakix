@@ -1,5 +1,5 @@
 """
-UUHAKIX Rate Limiting Middleware
+UHAKIX Rate Limiting Middleware
 Protects against abuse while keeping access free for citizens.
 """
 

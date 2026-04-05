@@ -1,5 +1,5 @@
 """
-UUHAKIX Configuration — Pydantic Settings with .env support
+UHAKIX Configuration — Pydantic Settings with .env support
 """
 
 from pydantic_settings import BaseSettings
@@ -10,7 +10,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # ── Application ───────────────────────────────────────
-    app_name: str = "UUHAKIX"
+    app_name: str = "UHAKIX"
     app_env: str = "production"
     app_debug: bool = False
     secret_key: str = "change-me"
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
         return [o.strip() for o in self.cors_origins.split(",")]
 
     # ── Database ──────────────────────────────────────────
-    database_url: str = "postgresql+asyncpg://uuhakix:uuhakix@postgres:5432/uuhakix"
+    database_url: str = "postgresql+asyncpg://uhakix:uhakix@postgres:5432/uhakix"
 
     # ── Redis ─────────────────────────────────────────────
     redis_url: str = "redis://redis:6379/0"
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
 
     # ── Storage ───────────────────────────────────────────
     s3_endpoint_url: str = ""
-    s3_bucket_name: str = "uuhakix-media"
+    s3_bucket_name: str = "uhakix-media"
     s3_access_key_id: str = ""
     s3_secret_access_key: str = ""
 

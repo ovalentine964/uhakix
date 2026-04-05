@@ -1,4 +1,4 @@
-"""UUHAKIX Health Check Endpoints"""
+"""UHAKIX Health Check Endpoints"""
 from fastapi import APIRouter
 from datetime import datetime
 
@@ -10,7 +10,7 @@ async def health_check():
     """Basic health check."""
     return {
         "status": "healthy",
-        "service": "UUHAKIX",
+        "service": "UHAKIX",
         "version": "1.0.0",
         "timestamp": datetime.utcnow().isoformat(),
     }

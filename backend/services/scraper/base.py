@@ -1,4 +1,4 @@
-"""UUHAKIX Scraper Services — Government data ingestion"""
+"""UHAKIX Scraper Services — Government data ingestion"""
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List
 from datetime import datetime
@@ -14,7 +14,7 @@ class BaseScraper(ABC):
     
     source_name: str = "base"
     base_url: str = ""
-    headers = {"User-Agent": "UUHAKIX Transparency Bot/1.0 (+https://uuhakix.ke)"}
+    headers = {"User-Agent": "UHAKIX Transparency Bot/1.0 (+https://uhakix.ke)"}
 
     async def _fetch(self, url: str, params: Dict = None) -> str:
         async with httpx.AsyncClient(timeout=30) as client:

@@ -1,5 +1,5 @@
 """
-UUHAKIX Neo4j Driver — Graph Database Connection
+UHAKIX Neo4j Driver — Graph Database Connection
 """
 
 from neo4j import AsyncGraphDatabase
