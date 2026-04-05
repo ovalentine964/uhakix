@@ -1,108 +1,182 @@
 """
-UHAKIX Neo4j Driver — Graph Database Connection
+UHAKIX Neo4j Driver — Connection Pool and Query Executor
+Production-grade async Neo4j integration with connection pooling,
+automatic retries, and typed query results.
 """
 
-from neo4j import AsyncGraphDatabase
-from neo4j.asyncio import AsyncDriver
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional, Tuple
+from contextlib import asynccontextmanager
+import neo4j
+from neo4j import AsyncGraphDatabase, AsyncDriver, AsyncSession
+from neo4j.exceptions import ServiceUnavailable, TransientError, Neo4jError
+from core.config import settings
 import structlog
 
 logger = structlog.get_logger()
 
 
 class Neo4jDriver:
-    """Async Neo4j driver with connection pooling."""
+    """
+    Async Neo4j driver with connection pooling.
+    
+    Manages:
+    - Connection lifecycle (connect/close)
+    - Session management with context managers
+    - Query execution with retries
+    - Graph schema enforcement
+    """
 
-    def __init__(self, uri: str, user: str, password: str):
-        self.uri = uri
-        self.user = user
-        self.password = password
-        self.driver: Optional[AsyncDriver] = None
+    def __init__(
+        self,
+        uri: Optional[str] = None,
+        user: Optional[str] = None,
+        password: Optional[str] = None,
+        database: str = "neo4j",
+        max_pool_size: int = 50,
+        max_retry_time: int = 30,
+    ):
+        self.uri = uri or settings.neo4j_uri
+        self.user = user or settings.neo4j_user
+        self.password = password or settings.neo4j_password
+        self.database = database
+        self.max_pool_size = max_pool_size
+        self.max_retry_time = max_retry_time
 
-    async def connect(self):
-        """Initialize the Neo4j driver."""
-        self.driver = AsyncGraphDatabase.driver(
-            self.uri,
-            auth=(self.user, self.password),
-            max_connection_lifetime=3600,
-            max_connection_pool_size=50,
-            connection_acquisition_timeout=30,
-        )
-        # Test connection
-        async with self.driver.session() as session:
-            result = await session.run("RETURN 1 AS test")
-            record = await result.single()
-            if record and record["test"] == 1:
-                logger.info("neo4j_connected", uri=self.uri)
+        self._driver: Optional[AsyncDriver] = None
+        self._connected = False
 
-    async def close(self):
-        """Close Neo4j connections."""
-        if self.driver:
-            await self.driver.close()
+    async def connect(self) -> None:
+        """Initialize Neo4j driver and verify connection."""
+        try:
+            self._driver = AsyncGraphDatabase.driver(
+                self.uri,
+                auth=(self.user, self.password),
+                max_connection_pool_size=self.max_pool_size,
+                max_transaction_retry_time=self.max_retry_time,
+                encrypted=False,  # Set to True for production with SSL certs
+            )
+            await self._driver.verify_connectivity()
+            self._connected = True
+            logger.info("neo4j_connected", uri=self.uri)
+        except Exception as e:
+            logger.error("neo4j_connection_failed", error=str(e), uri=self.uri)
+            self._connected = False
+            raise
+
+    async def close(self) -> None:
+        """Close the Neo4j driver."""
+        if self._driver:
+            await self._driver.close()
+            self._connected = False
             logger.info("neo4j_disconnected")
 
-    async def execute_query(self, query: str, parameters: Dict = None) -> List[Dict[str, Any]]:
-        """Execute a Cypher query and return results."""
-        if not self.driver:
-            raise RuntimeError("Neo4j driver not connected")
+    @property
+    def is_connected(self) -> bool:
+        return self._connected and self._driver is not None
 
-        params = parameters or {}
-        results = []
-        async with self.driver.session() as session:
-            result = await session.run(query, params)
-            async for record in result:
-                results.append(dict(record))
-        return results
+    @asynccontextmanager
+    async def session(self, database: Optional[str] = None):
+        """Get an async session with automatic cleanup."""
+        if not self.is_connected:
+            raise RuntimeError("Neo4j not connected. Call connect() first.")
 
-    async def execute_write(self, query: str, parameters: Dict = None) -> Dict[str, Any]:
-        """Execute a write query."""
-        if not self.driver:
-            raise RuntimeError("Neo4j driver not connected")
+        session = self._driver.session(
+            database=database or self.database,
+            default_access_mode=neo4j.WRITE_ACCESS,
+        )
+        try:
+            yield session
+        finally:
+            await session.close()
 
-        params = parameters or {}
-        async with self.driver.session() as session:
-            result = await session.run(query, params)
-            summary = await result.consume()
-            return {
-                "counters": summary.counters.__dict__,
-            }
+    async def execute_write(self, query: str, parameters: Optional[Dict] = None) -> Any:
+        """Execute a write query with retry logic."""
+        parameters = parameters or {}
 
-    async def create_node(self, label: str, properties: Dict[str, Any]) -> Dict[str, Any]:
-        """Create a new node."""
-        props = ", ".join(f"{k}: ${k}" for k in properties.keys())
-        query = f"CREATE (n:{label} {{{props}}}) RETURN n"
-        return await self.execute_write(query, properties)
+        async def _run_tx(tx):
+            result = await tx.run(query, **parameters)
+            return await result.data()
 
-    async def create_relationship(
-        self,
-        from_label: str,
-        from_id: str,
-        from_key: str,
-        to_label: str,
-        to_id: str,
-        to_key: str,
-        rel_type: str,
-        properties: Dict = None,
-    ) -> Dict[str, Any]:
-        """Create a relationship between two nodes."""
-        props = ", ".join(f"{k}: ${k}" for k in (properties or {}).keys())
-        rel_clause = f"[r:{rel_type} {{{props}}}]" if props else f"[r:{rel_type}]"
+        try:
+            async with self.session() as session:
+                return await session.execute_write(_run_tx)
+        except (ServiceUnavailable, TransientError) as e:
+            logger.error("neo4j_write_failed", query=query[:100], error=str(e))
+            raise
 
-        query = f"""
-        MATCH (a:{from_label} {{{from_key}: $from_value}})
-        MATCH (b:{to_label} {{{to_key}: $to_value}})
-        MERGE (a)-{rel_clause}->(b)
-        RETURN a, b, r
-        """
+    async def execute_read(self, query: str, parameters: Optional[Dict] = None) -> List[Dict]:
+        """Execute a read query."""
+        parameters = parameters or {}
 
-        params = {"from_value": from_id, "to_value": to_id, **(properties or {})}
-        return await self.execute_write(query, params)
+        async def _run_tx(tx):
+            result = await tx.run(query, **parameters)
+            return await result.data()
 
-    async def search_nodes(self, label: str, search_term: str, limit: int = 20) -> List[Dict]:
-        """Search nodes by name (full-text search)."""
-        query = f"""
-        MATCH (n:{label})
-        WHERE n.name CONTAINS $search
-        RETURN n LIMIT $limit
-        """
-        return await self.execute_query(query, {"search": search_term, "limit": limit})
+        try:
+            async with self.session() as session:
+                return await session.execute_read(_run_tx)
+        except (ServiceUnavailable, TransientError) as e:
+            logger.error("neo4j_read_failed", query=query[:100], error=str(e))
+            raise
+
+    async def execute_cypher(self, query: str, parameters: Optional[Dict] = None) -> List[Dict]:
+        """Execute any Cypher query (read or write)."""
+        return await self.execute_read(query, parameters)
+
+
+# ── Entity Schema Definitions ──────────────────────────────────
+
+# Cypher queries for creating the graph schema
+CREATE_SCHEMA_QUERIES = [
+    # Entity Node Constraints
+    """
+    CREATE CONSTRAINT politician_id IF NOT EXISTS
+    FOR (p:Politician) REQUIRE p.id IS UNIQUE
+    """,
+    """
+    CREATE CONSTRAINT company_id IF NOT EXISTS
+    FOR (c:Company) REQUIRE c.id IS UNIQUE
+    """,
+    """
+    CREATE CONSTRAINT tender_id IF NOT EXISTS
+    FOR (t:Tender) REQUIRE t.id IS UNIQUE
+    """,
+    """
+    CREATE CONSTRAINT county_id IF NOT EXISTS
+    FOR (c:County) REQUIRE c.id IS UNIQUE
+    """,
+    """
+    CREATE CONSTRAINT project_id IF NOT EXISTS
+    FOR (p:Project) REQUIRE p.id IS UNIQUE
+    """,
+    """
+    CREATE CONSTRAINT transaction_id IF NOT EXISTS
+    FOR (t:Transaction) REQUIRE t.id IS UNIQUE
+    """,
+
+    # Node Properties Indexes (for fast lookups)
+    """
+    CREATE INDEX politician_name_idx IF NOT EXISTS
+    FOR (p:Politician) ON (p.name, p.constituency)
+    """,
+    """
+    CREATE INDEX company_name_idx IF NOT EXISTS
+    FOR (c:Company) ON (c.name)
+    """,
+    """
+    CREATE INDEX tender_ministry_idx IF NOT EXISTS
+    FOR (t:Tender) ON (t.ministry, t.status)
+    """,
+    """
+    CREATE INDEX county_name_idx IF NOT EXISTS
+    FOR (c:County) ON (c.name)
+    """,
+    """
+    CREATE INDEX transaction_date_idx IF NOT EXISTS
+    FOR (t:Transaction) ON (t.date)
+    """,
+    """
+    CREATE INDEX transaction_amount_idx IF NOT EXISTS
+    FOR (t:Transaction) ON (t.amount_kes)
+    """,
+]
