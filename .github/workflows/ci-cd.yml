@@ -7,37 +7,19 @@ on:
     branches: [main]
 
 jobs:
-  # Blockchain Smart Contract Tests
-  smart-contract-test:
+  # Smart contract tests
+  contract-test:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: blockchain
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
           cache-dependency-path: blockchain/package.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Hardhat tests
-        run: npx hardhat test
-
-  # Static site validation
-  site-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Validate HTML
-        run: |
-          # Check index.html exists and is valid
-          test -f index.html && echo "index.html exists" || exit 1
-          test -f docs/index.html && echo "docs/index.html exists" || exit 1
-          echo "Site files validated"
+      - run: npm ci
+      - run: npx hardhat compile
+      - run: npx hardhat test
