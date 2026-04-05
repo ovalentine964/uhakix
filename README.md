@@ -5,9 +5,12 @@
 
 **Built by [CoHusdex](https://github.com/ovalentine964/cohusdex-public) — Multi-Agentic Economic AI Systems**
 
-UHAKIX (*"Uhakika"* = Certainty + *"Hakiki"* = Verify + *"X"* = AI) is Kenya's first AI-powered, multi-agent government transparency and electoral accountability platform.
-
-We illuminate every corrupt deal, verify every vote, track every shilling — so citizens can hold power accountable without shedding blood.
+<p align="center">
+<a href="https://github.com/ovalentine964/uhakix/stargazers"><img src="https://img.shields.io/github/stars/ovalentine964/uhakix?style=for-the-badge" alt="Stars"></a>
+<a href="https://github.com/ovalentine964/uhakix/forks"><img src="https://img.shields.io/github/forks/ovalentine964/uhakix?style=for-the-badge" alt="Forks"></a>
+<a href="https://github.com/ovalentine964/uhakix/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ovalentine964/uhakix?style=for-the-badge" alt="License"></a>
+<a href="https://github.com/ovalentine964/uhakix/actions"><img src="https://img.shields.io/github/actions/workflow/status/ovalentine964/uhakix/ci-cd.yml?style=for-the-badge" alt="CI/CD"></a>
+</p>
 
 ---
 
@@ -26,18 +29,17 @@ We give citizens **independent, AI-powered verification** of:
 
 ---
 
-## 🔥 Critical Sectors We Monitor
+## 🚀 Quick Start
 
-| Sector | Why It Matters | Estimated Annual Loss |
-|--------|---------------|---------------------|
-| **National Infrastructure** | Self-audit law passed March 9 — citizens need independent verification | KES 200-400B |
-| **SHA (Social Health Authority)** | Replaced NHIF, billions collected but citizens can't access services | KES 50-100B |
-| **e-Citizen** | All government services centralized — but where does the money go? | KES 30-50B |
-| **County Governments** | 47 counties spending billions with zero transparency | KES 300-500B |
-| **Procurement (Tenders)** | inflated contracts, ghost companies, sole-source awards | KES 400-800B |
-| **Elections & IEBC** | Vote counting irregularities, Form 34A manipulation | Priceless (democracy) |
-| **Education Funding** | CDF, bursaries, infrastructure funds — who gets what? | KES 50-80B |
-| **Healthcare (NHIF/SHA)** | Fake claims, ghost hospitals, drug procurement fraud | KES 100-200B |
+```
+git clone https://github.com/ovalentine964/uhakix.git
+cd uhakix
+cp .env.example .env
+# Edit .env with your NVIDIA API key + Telegram bot token
+docker compose up -d
+```
+
+See [docs/GETTING-STARTED.md](docs/GETTING-STARTED.md) for full setup.
 
 ---
 
@@ -53,60 +55,78 @@ We give citizens **independent, AI-powered verification** of:
 | **VERIFY** | Election result validation | Nemotron-4-340B |
 | **COUNT** | Real-time vote counting aggregation | Llama-3.1-70B |
 | **ALERT** | Anomaly detection during elections | Llama-3.1-8B |
+| **WHISPER** | Voice transcription (Swahili/Sheng/English) | openai/whisper-large-v3 (open-source) |
+| **MMS** | Text-to-speech (Swahili voice responses) | facebook/mms-tts (open-source) |
+| **CIVIC EDU** | Constitution rights + anti-manipulation | Constitutional database + 48 Laws |
 
 ---
 
 ## 📡 Citizen Access Channels
 
-### 1. WhatsApp (Connected via QR — Same as OpenClaw)
-- Connect via scanning QR code (no API token needed — uses your WhatsApp device link)
-- Send Form 34A photos, chat with AI, ask about government spending
-- Works 24/7 with auto-reconnect
-
-### 2. Telegram Bot
-- Add your Telegram bot token from @BotFather
-- Same capabilities as WhatsApp
-- Works via webhooks for reliability
-
-### 3. Web Dashboard
-- Full dashboard: charts, entity graphs, investigations
-- Real-time election monitoring
-- Anonymous corruption reporting
-
-### 4. USSD (*XXX#) — Coming After WhatsApp & Telegram
-- No internet needed — basic spending checks, election results, anonymous tips
+| Channel | How It Works | When |
+|---------|-------------|------|
+| **Telegram** | Search `@UhakixBot` → Chat or send voice notes | ✅ Phase 1 (now) |
+| **Web** | Browser dashboard with charts, entity graphs | ✅ Phase 1 (now) |
+| **WhatsApp** | Text a phone number with photo/text | ⏳ Phase 2 |
+| **USSD** | *XXX# for feature phones | ⏳ Phase 3 |
 
 ---
 
-## 🔮 Future-Ready: AGI/Quantum/ASI Integration
+## 🔥 Critical Sectors Monitored
 
-UHAKIX is built for the post-AGI world: AGI for autonomous analysis, Quantum for unbreakable evidence, ASI for predictive governance that detects corruption before it happens.
+| Sector | Annual Loss | Status |
+|--------|------------|--------|
+| **National Infrastructure** | KES 200-400B | 🔴 Critical (self-audit law) |
+| **SHA (Social Health)** | KES 50-100B | 🔴 Critical |
+| **e-Citizen** | KES 30-50B | 🔴 Critical |
+| **County Governments** | KES 300-500B | 🔴 Critical |
+| **Procurement** | KES 400-800B | 🔴 Critical |
+| **Elections & IEBC** | Priceless | 🔴 Critical |
+| **Education Funding** | KES 50-80B | 🟠 High |
+| **Healthcare (NHIF/SHA)** | KES 100-200B | 🔴 Critical |
+
+---
+
+## 🗣️ Voice Capabilities
+
+UHAKIX supports **voice interaction** for citizens who prefer speaking over typing:
+
+- **Speech-to-Text:** Open-source `whisper-large-v3` (Swahili, English, Sheng code-switching)
+- **Text-to-Speech:** Open-source `facebook/mms-tts` (Swahili responses)
+- **Sheng Detection:** Built-in glossary normalizes 30+ common Sheng terms automatically
+
+---
+
+## 📚 Knowledge Base
+
+All integrated into the system:
+
+- **Constitution of Kenya 2010** — 7 key articles with citizen-actionable steps
+- **48 Laws of Political Power** — Adapted for Kenyan citizen awareness
+- **Budget Literacy** — How to read county budgets, track spending
+- **Election Monitoring** — How to verify results, spot anomalies
+
+---
+
+## ⚖️ Governance
+
+- **10 Core Rules** — Including neutrality, 3-source rule, anti-manipulation
+- **Legal Compliance** — Kenya Data Protection Act 2019 compliant
+- **Open Source** — AGPL-3.0 license, all code auditable
+- **Voice Models** — MIT + CC BY-NC licenses
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Component | Technology |
-|-----------|-----------|
-| **AI Engine** | NVIDIA NIM API (multi-agent system) |
+| Layer | Technology |
+|-------|-----------|
+| **AI Engine** | NVIDIA NIM API + Open-source Whisper + MMS-TTS |
 | **Graph DB** | Neo4j (entity relationship mapping) |
 | **Blockchain** | Polygon (evidence storage, vote verification) |
-| **Frontend** | React + TypeScript (web), React Native (mobile) |
-| **Backend** | FastAPI (Python) |
-| **WhatsApp** | Device-link via QR (same as OpenClaw) |
-| **Telegram** | Bot API with webhooks |
-
----
-
-## 📊 Economic Foundation
-
-Built on 44 units of Economics & Statistics from Masinde Muliro University — every analysis is econometrically validated, every risk score is statistically grounded.
-
----
-
-## License
-
-AGPL-3.0 (open source — everyone can audit our code)
+| **Backend** | FastAPI (Python) + Celery workers |
+| **Frontend** | React + TypeScript + Tailwind CSS |
+| **Monitoring** | Flower + VIGIL agent (24/7 health checks) |
 
 ---
 
