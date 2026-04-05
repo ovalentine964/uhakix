@@ -215,7 +215,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 // ============================
 // NVIDIA AI CHAT - WORKING VERSION
 // ============================
-const NVIDIA_KEY = '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';
+const NVIDIA_KEY = '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';
 const NVIDIA_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
 const SYSTEM_PROMPT = `You are UHAKIX 🦁 — Kenya's AI government transparency and civic education assistant.
 
@@ -260,7 +260,7 @@ async function sendToAI(text) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'meta/llama-3.1-70b-instruct',
+                model: 'nvidia/nemotron-4-340b-instruct',
                 messages: [
                     { role: 'system', content: SYSTEM_PROMPT },
                     { role: 'user', content: text }
