@@ -1,5 +1,5 @@
 """
-UJUZIO Logging Configuration — Structured JSON logging with Sentry
+HAKIX Logging Configuration — Structured JSON logging with Sentry
 """
 
 import logging

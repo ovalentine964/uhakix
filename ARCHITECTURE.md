@@ -1,147 +1,199 @@
-# 🇰🇪 UJUZIO — Kenya Transparency Platform
-## Multi-Agent AI System for Public Accountability & Electoral Integrity
+# ARCHITECTURE.md — HAKIX Data Flow & System Design
 
----
+## Data Flow Diagrams
 
-## 📋 EXECUTIVE SUMMARY
+### 1. Government Data Ingestion Pipeline
+```
+┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
+│  IFMIS           │   │  tenders.go.ke   │   │  Treasury        │
+│  (transactions)  │   │  (procurement)   │   │  (allocations)   │
+└────────┬─────────┘   └────────┬─────────┘   └────────┬─────────┘
+         │                      │                      │
+         ▼                      ▼                      ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    SCRAPER SERVICES (Python)                     │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐       │
+│  │ IFMIS  │ │Tenders │ │  COB   │ │Treasury │ │Gazette │  ...  │
+│  └───┬────┘ └───┬────┘ └───┬────┘ └───┬────┘ └───┬────┘       │
+└──────┼──────────┼───────────┼───────────┼──────────┼────────────┘
+       │          │           │           │          │
+       ▼          ▼           ▼           ▼          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    DATA NORMALIZATION LAYER                      │
+│  • Standardize currency (KES)                                    │
+│  • Standardize entity names (ministry, county, company)          │
+│  • Extract structured fields from HTML/PDF                       │
+│  • Deduplicate records                                           │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              MULTI-AGENT ANALYSIS PIPELINE                       │
+│                                                                  │
+│  ┌────────┐     ┌────────┐     ┌────────┐     ┌────────┐      │
+│  │ JASIRI │────▶│ SPHINX │────▶│ SCOUT  │────▶│ SHIELD │      │
+│  │Budget  │     │Anomaly │     │Network │     │Legal   │      │
+│  │Intel   │     │Detect  │     │Mapping │     │Filter  │      │
+│  └────────┘     └────────┘     └───┬────┘     └───┬────┘      │
+│                                    │               │           │
+│  ┌────────┐                        │               │           │
+│  │  RIFT  │────────────────────────┘               │           │
+│  │Procure │                                        │           │
+│  │Analysis│────────────────────────────────────────┘           │
+│  └────────┘                                                    │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              ▼                             ▼
+       ┌──────────────┐            ┌──────────────┐
+       │   Neo4j      │            │ PostgreSQL   │
+       │  (Graph DB)  │            │ (Structured  │
+       │  Connections │            │  Storage)    │
+       └──────┬───────┘            └──────┬───────┘
+              │                           │
+              └───────────┬───────────────┘
+                          ▼
+                   ┌──────────────┐
+                   │   Redis      │
+                   │  (Cache)     │
+                   └──────┬───────┘
+                          ▼
+                   ┌──────────────┐
+                   │    API       │
+                   │  Endpoints   │
+                   └──────────────┘
+```
 
-**Problem:** Corruption costs Kenya KES 1+ trillion annually. Elections are volatile due to unverifiable vote counting. Citizens cannot track public spending or verify procurement.
+### 2. Election Verification Pipeline
+```
+Citizen                        AI Pipeline                        Blockchain
+   │                                │                                 │
+   │  📷 Upload Form 34A           │                                 │
+   ├─────────────────────────────▶│                                 │
+   │                               │                                 │
+   │                               │  1. POLL WITNESS Agent          │
+   │                               │     ┌─────────────────────┐     │
+   │                               │     │ Vision Model (NVIDIA) │     │
+   │                               │     │ OCR + Data Extract    │     │
+   │                               │     │ Station code, votes,  │     │
+   │                               │     │ totals, serial #      │     │
+   │                               │     └──────────┬──────────┘     │
+   │                               │                │                │
+   │                               │  2. VERIFY Agent               │
+   │                               │     ┌─────────────────────┐     │
+   │                               │     │ Check: watermarks    │     │
+   │                               │     │ signatures, math     │     │
+   │                               │     │ consistency          │     │
+   │                               │     └──────────┬──────────┘     │
+   │                               │                │                │
+   │                               │  3. COUNT Agent                 │
+   │                               │     ┌─────────────────────┐     │
+   │                               │     │ Cross-verify with    │     │
+   │                               │     │ other submissions    │     │
+   │                               │     │ for same station     │     │
+   │                               │     │ Aggregate → median   │     │
+   │                               │     └──────────┬──────────┘     │
+   │                               │                │                │
+   │                               │  4. ALERT Agent                 │
+   │                               │     ┌─────────────────────┐     │
+   │                               │     │ Check: turnout >95%  │     │
+   │                               │     │ duplicate submissions│     │
+   │                               │     │ timing anomalies     │     │
+   │                               │     └──────────┬──────────┘     │
+   │                               │                │                │
+   │                               │  5. LEDGER Agent               │
+   │                               │     ┌─────────────────────┐     │
+   │                               │     │ SHA-256 hash of     │     │
+   │                               │     │ station results     │     │
+   │                               │     └──────────┬──────────┘     │
+   │                               │                │                │
+   │                               │                ├───────────────▶│
+   │                               │                │  Store hash on │
+   │                               │                │  Polygon chain │
+   │                               │                │                │
+   │  ✅ "Station 001 verified     │                │  Citizens can  │
+   │     & recorded on-chain"      │◀───────────────┤  verify later  │
+   │◀──────────────────────────────│                │                │
+```
 
-**Solution:** A multi-agent AI system with blockchain immutability, real-time citizen access, and AI-powered cross-referencing of all government data.
+### 3. Citizen Query Flow (WhatsApp/USSD/Web)
+```
+Citizen                    HAKIX Platform                 Data Sources
+   │                              │                              │
+   │ "How much did Health Ministry│                              │
+   │  spend on road construction?"│                              │
+   ├─────────────────────────────▶│                              │
+   │                              │  1. KAZI routes to JASIRI    │
+   │                              │                              │
+   │                              │  2. JASIRI queries Neo4j +   │
+   │                              │     analyzes spending data   │
+   │                              │                              │
+   │                              │  3. HERALD translates to     │
+   │                              │     Swahili/English reply    │
+   │                              │                              │
+   │                              │  4. SHIELD legal review:     │
+   │                              │     ✓ No accusations         │
+   │                              │     ✓ 3+ sources ✓ Redacted  │
+   │                              │                              │
+   │ "The Ministry of Health spent│                              │
+   │  KES 2.3B on road-related   │                              │
+   │  projects in FY 2023/24.    │                              │
+   │  Sources: IFMIS, Treasury,  │                              │
+   │  Controller of Budget."     │                              │
+   │◀─────────────────────────────│                              │
+```
 
-**Key Differences from Bruno's (br/acc):**
-| Feature | br/acc (Brazil) | UjuziO (Kenya) |
-|---------|----------------|------|
-| Architecture | Static ETL + Graph DB | Autonomous multi-agent system |
-| AI Analysis | None | NVIDIA AI multi-agent analysis |
-| Election Monitoring | No | Real-time vote verification |
-| Blockchain | No | Tamper-proof audit trail |
-| Public Access | API + React search | Multi-channel (web, USSD, WhatsApp) |
-| Entity Resolution | CPF/ID only | Name + phone + ID + alias + shell company |
-| Risk Scoring | None | AI-powered with legal privacy gates |
+### 4. Multi-Agent Coordination
+```
+                    KAZI (Orchestrator)
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+         JASIRI       RIFT       SCOUT
+       (Budget)   (Procurement) (Network)
+              │          │          │
+              └──────────┼──────────┘
+                         ▼
+                      SPHINX
+                  (Anomaly Detection)
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+          ATLAS       SHIELD     LEDGER
+         (Geographic)  (Legal)   (Blockchain)
+              │          │          │
+              └──────────┼──────────┘
+                         ▼
+                      HERALD
+                  (Citizen Output)
+                         │
+                     VIGIL
+                 (Audit Log — always)
+```
 
----
+## Scaling Strategy
 
-## 🏗️ AGENT ARCHITECTURE
+### Phase 1: Free Tier (0-10K users)
+- Heroku Free / Render Free for backend
+- Neon Free for PostgreSQL
+- Neo4j Aura Free (1M nodes)
+- Redis Upstash Free
+- AWS S3 Free Tier
+- Polygon Amoy Testnet (free)
+- NVIDIA NIM Free Tier
 
-### Core Agent Team:
+### Phase 2: Low-Cost Production (10K-100K users)
+- AWS ECS Fargate (backend)
+- RDS PostgreSQL (db.t3.medium)
+- Neo4j Aura Professional
+- AWS ElastiCache Redis
+- CloudFront CDN for frontend
+- Polygon Mainnet (cheap gas)
 
-| Agent | Role | NVIDIA Model |
-|-------|------|--------------|
-| **JASIRI** | Orchestrator, decision engine | Nemotron-4-340B-Instruct |
-| **RIFT** | IFMIS + Treasury + COB data ingestion | Llama-3.1-70B-Instruct |
-| **SCOUT** | News + social monitoring for corruption signals | Llama-3.1-70B-Instruct |
-| **SPHINX** | Cross-reference analysis, risk scoring | Nemotron-4-340B-Instruct |
-| **KAZI** | Data pipeline maintenance, ETL automation | Phi-3-Mini |
-| **HERALD** | Public reports, media alerts, citizen updates | Llama-3.1-8B-Instruct |
-| **SHIELD** | Legal privacy compliance, redaction checks | Llama-3.1-8B-Instruct |
-| **VIGIL** | System health, uptime monitoring | Phi-3-Mini |
-| **ATLAS** | Cross-border data correlation | Llama-3.1-70B-Instruct |
-| **LEDGER** | Financial tracking, budget vs actual | Nemotron-4-340B-Instruct |
-
-### Election Monitoring Sub-Team:
-
-| Agent | Role | Function |
-|-------|------|----------|
-| **POLL WITNESS** | Vote verification agent | Analyzes citizen photos of Form 34A |
-| **VERIFY AGENT** | IEBC result cross-checking | Matches polling station data with uploaded images |
-| **COUNT AGENT** | Real-time vote counting | Aggregates verified votes from all stations |
-| **ALERT AGENT** | Anomaly detection | Flags discrepancies, missing stations, unusual patterns |
-
----
-
-## 📊 DATA SOURCES
-
-### Public Financial Data:
-1. IFMIS (ifmis.go.ke) — All government financial transactions
-2. PPRA/Tenders (tenders.go.ke) — Procurement portal
-3. Controller of Budget (controllerofbudget.go.ke) — Budget execution
-4. National Treasury (treasury.go.ke) — Budget allocations
-5. Parliament Hansard — MP statements, voting records
-
-### Public Governance Data:
-6. Kenya Gazette — Government appointments
-7. IEBC Results Portal — Election data
-8. Company Registry — CR12 filings, company directors
-9. County Government Portals — 47 county budgets
-10. EACC — Investigation reports
-11. Audit Office Reports — AG's annual reports
-
-### Election Data:
-12. IEBC Form 34A/34B — Polling station results (citizen uploads)
-13. Citizen Photos — Verified polling station result forms
-
----
-
-## 🔐 SECURITY & TAMPER RESISTANCE
-
-1. **Blockchain for Vote Data:** Each vote count submission is hashed and stored
-2. **AI Verification:** Multiple AI agents independently verify each submission
-3. **Citizen Cross-Check:** Multiple citizens at same station submit same data → consensus
-4. **No ID Required:** Works with name, phone, station number only (privacy by design)
-5. **Redaction System:** Legal compliance auto-redacts sensitive personal data
-6. **Immutable Evidence:** Once verified, data cannot be modified
-
----
-
-## 📱 CITIZEN ACCESS CHANNELS
-
-| Channel | How It Works |
-|---------|-------------|
-| Web Portal | Full dashboard, graphs, entity exploration |
-| USSD | *XXX# to check constituency spending, election results |
-| WhatsApp | Chat with AI agent for queries, photo upload |
-| SMS | Alerts for election day anomalies |
-| Open API | Developers build apps on top of our data |
-
----
-
-## 🛠️ TECH STACK
-
-| Component | Technology |
-|-----------|----------|
-| Graph DB | Neo4j 5 Community (Free) |
-| AI Engine | NVIDIA NIM API (cloud) |
-| Blockchain | Polygon (low cost) |
-| Backend | FastAPI (Python) |
-| Frontend | React + TypeScript |
-| Mobile | React Native |
-| Data Lake | PostgreSQL + Parquet files |
-
----
-
-## 🚀 PHASED ROLLOUT
-
-### Phase 1: Foundation (Weeks 1-4)
-- Scrape all public financial data sources
-- Build basic Neo4j graph
-- Launch web dashboard (view-only)
-- First AI-driven risk analysis reports
-
-### Phase 2: Multi-Agent Intelligence (Weeks 5-8)
-- Deploy full OpenClaw agent team
-- Continuous monitoring + cross-referencing
-- Automated alerts and reports
-- WhatsApp citizen interface
-
-### Phase 3: Election System (Weeks 9-12)
-- Vote counting verification system
-- USSD + WhatsApp upload
-- Real-time public dashboard
-- Blockchain evidence storage
-
-### Phase 4: Scale & Open (Weeks 13-16)
-- Open-source release
-- County-level deep dives
-- Mobile app launch
-- API for third-party developers
-
----
-
-## ⚖️ LEGAL SAFEGUARDS
-
-1. **No Direct Accusations:** System generates "connection reports" not "corruption labels"
-2. **Privacy First:** Auto-redacts ID numbers, personal phone numbers
-3. **Multi-Source Verification:** Requires 3+ independent sources before flagging
-4. **Right of Response:** Anyone flagged gets automatic notification + response mechanism
-5. **Legal Review:** SHIELD agent runs legal compliance check on all public outputs
+### Phase 3: Scale (100K+ users)
+- Kubernetes cluster (EKS/GKE)
+- Read replicas for PostgreSQL
+- Neo4j Causal Cluster
+- Redis Cluster
+- Multi-region deployment
+- Polygon mainnet + L2

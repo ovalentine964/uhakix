@@ -1,5 +1,5 @@
 """
-UJUZIO Rate Limiting Middleware
+HAKIX Rate Limiting Middleware
 Protects against abuse while keeping access free for citizens.
 """
 

@@ -1,5 +1,5 @@
 """
-UJUZIO Agent Base — All agents inherit from this
+HAKIX Agent Base — All agents inherit from this
 """
 
 from abc import ABC, abstractmethod
@@ -13,7 +13,7 @@ logger = structlog.get_logger()
 
 
 class Agent(ABC):
-    """Base class for all UJUZIO agents."""
+    """Base class for all HAKIX agents."""
 
     name: str = "base"
     role: str = "Base Agent"

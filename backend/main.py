@@ -1,5 +1,5 @@
 """
-UJUZIO Backend API — Production Entry Point
+HAKIX Backend API — Production Entry Point
 FastAPI application with middleware, routing, and lifecycle management.
 """
 
@@ -56,7 +56,7 @@ def create_application() -> FastAPI:
     """Create and configure the FastAPI application."""
 
     app = FastAPI(
-        title="UJUZIO API",
+        title="HAKIX API",
         description="Kenya's AI-Powered Government Transparency Platform",
         version="1.0.0",
         docs_url="/api/docs",

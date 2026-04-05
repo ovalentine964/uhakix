@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 /**
- * UJUZIO Transparency Registry
+ * HAKIX Transparency Registry
  * Stores hashes of verified government data + election results on Polygon.
  * Immutable, publicly verifiable, cannot be tampered.
  *
@@ -56,12 +56,12 @@ contract TransparencyRegistry {
 
     // ── Modifiers ───────────────────────────────────────────
     modifier onlyOwner() {
-        require(msg.sender == owner, "UJUZIO: not owner");
+        require(msg.sender == owner, "HAKIX: not owner");
         _;
     }
 
     modifier onlyAuthorized() {
-        require(authorizedSubmitters[msg.sender], "UJUZIO: not authorized");
+        require(authorizedSubmitters[msg.sender], "HAKIX: not authorized");
         _;
     }
 
@@ -83,7 +83,7 @@ contract TransparencyRegistry {
         string calldata dataType,
         string calldata referenceId
     ) external onlyAuthorized {
-        require(!records[dataHash].exists, "UJUZIO: hash already recorded");
+        require(!records[dataHash].exists, "HAKIX: hash already recorded");
 
         records[dataHash] = DataRecord({
             dataHash: dataHash,
@@ -112,8 +112,8 @@ contract TransparencyRegistry {
         bytes32[] calldata hashes,
         string calldata dataType
     ) external onlyAuthorized {
-        require(!batches[batchId].exists, "UJUZIO: batch already recorded");
-        require(hashes.length > 0, "UJUZIO: empty batch");
+        require(!batches[batchId].exists, "HAKIX: batch already recorded");
+        require(hashes.length > 0, "HAKIX: empty batch");
 
         // Record individual hashes
         for (uint256 i = 0; i < hashes.length; i++) {
@@ -168,7 +168,7 @@ contract TransparencyRegistry {
         string memory dataType,
         string memory referenceId
     ) {
-        require(records[dataHash].exists, "UJUZIO: hash not found");
+        require(records[dataHash].exists, "HAKIX: hash not found");
         DataRecord storage record = records[dataHash];
         return (record.submitter, record.timestamp, record.dataType, record.referenceId);
     }
@@ -181,7 +181,7 @@ contract TransparencyRegistry {
         uint256 timestamp,
         uint256 hashCount
     ) {
-        require(batches[batchId].exists, "UJUZIO: batch not found");
+        require(batches[batchId].exists, "HAKIX: batch not found");
         BatchRecord storage batch = batches[batchId];
         return (batch.dataType, batch.timestamp, batch.hashCount);
     }
@@ -215,7 +215,7 @@ contract TransparencyRegistry {
 
     // ── Ownership Transfer ──────────────────────────────────
     function transferOwnership(address newOwner) external onlyOwner {
-        require(newOwner != address(0), "UJUZIO: zero address");
+        require(newOwner != address(0), "HAKIX: zero address");
         owner = newOwner;
     }
 }

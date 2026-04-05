@@ -1,4 +1,4 @@
-"""UJUZIO Election Verification API"""
+"""HAKIX Election Verification API"""
 from typing import Optional, List
 from fastapi import APIRouter, UploadFile, File, Form, Query
 from pydantic import BaseModel, Field

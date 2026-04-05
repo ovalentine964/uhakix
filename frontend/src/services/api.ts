@@ -1,4 +1,4 @@
-// UJUZIO API Client — Centralized HTTP client with auth and error handling
+// HAKIX API Client — Centralized HTTP client with auth and error handling
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
@@ -28,7 +28,7 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.response?.status === 429) {
-      console.warn('Rate limited — UJUZIO API is protecting against abuse.');
+      console.warn('Rate limited — HAKIX API is protecting against abuse.');
     }
     if (error.response?.status === 403) {
       console.error('Access denied — SHIELD compliance layer blocked this request.');

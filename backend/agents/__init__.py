@@ -1,4 +1,4 @@
-"""UJUZIO Agent Module"""
+"""HAKIX Agent Module"""
 from agents.base import Agent
 from agents.jasiri.agent import JasiriAgent
 from agents.rift.agent import RiftAgent

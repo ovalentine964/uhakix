@@ -1,4 +1,4 @@
-"""UJUZIO Transparency API — Government Financial Data"""
+"""HAKIX Transparency API — Government Financial Data"""
 from typing import Optional, List
 from datetime import date
 from fastapi import APIRouter, Query, Depends

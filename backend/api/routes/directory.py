@@ -1,4 +1,4 @@
-"""UJUZIO Entity Directory API — Graph-based entity search and connections"""
+"""HAKIX Entity Directory API — Graph-based entity search and connections"""
 from typing import Optional, List
 from fastapi import APIRouter, Query
 from pydantic import BaseModel

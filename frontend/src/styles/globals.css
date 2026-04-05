@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green-900: #14532d;
+  --green-800: #166534;
+  --green-700: #15803d;
+  --yellow-400: #facc15;
+  --red-600: #dc2626;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Graph visualization styles */
+.graph-node {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.graph-node:hover {
+  transform: scale(1.1);
+}
+
+/* Anomaly severity badges */
+.severity-low { @apply bg-green-100 text-green-800; }
+.severity-medium { @apply bg-yellow-100 text-yellow-800; }
+.severity-high { @apply bg-orange-100 text-orange-800; }
+.severity-critical { @apply bg-red-100 text-red-800 animate-pulse; }

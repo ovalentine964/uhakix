@@ -1,5 +1,5 @@
 """
-UJUZIO Neo4j Schema Definition
+HAKIX Neo4j Schema Definition
 Production graph schema for government entities, transactions, and connections.
 """
 
